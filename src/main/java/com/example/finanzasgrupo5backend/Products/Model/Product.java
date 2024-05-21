@@ -24,6 +24,6 @@ public class Product {
     @Column(name = "price", nullable = false)
     private Long price;
 
-    @Column(name = "store", nullable = false)
-    private Long store_id;
+    //e@Column(name = "store", nullable = false)
+    //private Long storeId;
 }

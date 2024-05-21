@@ -11,5 +11,7 @@ import lombok.NoArgsConstructor;
 //lo que devuelve
 public class ProductResponse {
 
-    private String id;
+    private Long id;
+    private String name;
+    private Long price;
 }
