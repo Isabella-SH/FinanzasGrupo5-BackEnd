@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -33,8 +34,18 @@ public class ProductServiceImpl implements IProductService {
         return null;
     }
 
+
+    //POST
     @Override
-    public ProductResponse createProduct(ProductRequest product) {
+    public ProductResponse createProduct(ProductRequest product, Long storeId) {
+
+        // Buscar el negocio
+        //var store = customerRepository.findById(customerId)
+        //        .orElseThrow(() -> new ResourceNotFoundException("No se encontró el cliente con ID: " + customerId));
+
+        // Validación
+
+
         return null;
     }
 

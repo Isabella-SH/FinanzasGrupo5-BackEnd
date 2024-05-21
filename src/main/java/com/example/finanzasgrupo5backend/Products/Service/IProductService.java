@@ -11,7 +11,7 @@ public interface IProductService {
 
     public  abstract ProductResponse getProductsByStoreId(Long storeId);
 
-    public abstract ProductResponse createProduct(ProductRequest product);
+    public abstract ProductResponse createProduct(ProductRequest product, Long storeId);
 
     public abstract ProductResponse updateProduct(Long id, ProductRequest product);
 
