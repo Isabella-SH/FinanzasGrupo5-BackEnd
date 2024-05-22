@@ -28,8 +28,8 @@ public class ProductController {
     @PostMapping("/products")
     public ResponseEntity<ProductResponse> createProduct
             (@RequestParam(name = "storeId") Long storeId, @RequestBody ProductRequest productRequest) {
-        var res = productService.createProduct(productRequest, storeId);
 
+        var res = productService.createProduct(productRequest, storeId);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
@@ -37,6 +37,13 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
         var res = productService.getAllProducts();
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Obtain a list of products by store Id")
+    @GetMapping("/products/store/{id}")
+    public ResponseEntity<List<ProductResponse>> getProductsByStoreId(@PathVariable(name = "id") Long storeId) {
+        var res = productService.getProductsByStoreId(storeId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package com.example.finanzasgrupo5backend.Products.Model;
 
+import com.example.finanzasgrupo5backend.Profile.Model.Store;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,9 @@ public class Product {
     @Column(name = "price", nullable = false)
     private Long price;
 
-    //e@Column(name = "store", nullable = false)
-    //private Long storeId;
+    //muchos productos pertenecen a un negocio
+    @ManyToOne
+    @JoinColumn(name = "store", nullable = false)
+    private Store store;
+
 }

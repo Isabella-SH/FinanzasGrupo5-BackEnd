@@ -4,6 +4,8 @@ import com.example.finanzasgrupo5backend.Products.Model.Product;
 import com.example.finanzasgrupo5backend.Products.Model.ProductRequest;
 import com.example.finanzasgrupo5backend.Products.Model.ProductResponse;
 import com.example.finanzasgrupo5backend.Products.Repository.IProductRepository;
+import com.example.finanzasgrupo5backend.Profile.Model.Store;
+import com.example.finanzasgrupo5backend.Profile.Repository.IStoreRepository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
 import com.example.finanzasgrupo5backend.Shared.exception.ValidationException;
 import com.example.finanzasgrupo5backend.Validations.ProductValidation;
@@ -12,20 +14,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Qualifier("productServiceImpl")
 public class ProductServiceImpl implements IProductService {
 
     private final IProductRepository productRepository;
+    private final IStoreRepository storeRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ProductServiceImpl(IProductRepository productRepository, ModelMapper modelMapper){
+    public ProductServiceImpl(IProductRepository productRepository, IStoreRepository storeRepository,ModelMapper modelMapper){
         this.modelMapper=modelMapper;
         this.productRepository=productRepository;
+        this.storeRepository=storeRepository;
     }
 
     @Override
@@ -42,8 +46,25 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ProductResponse getProductsByStoreId(Long storeId) {
-        return null;
+    public List<ProductResponse> getProductsByStoreId(Long storeId){
+
+        // Buscar si existe el store
+        var existingStore = storeRepository.findById(storeId);
+        if (existingStore.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró el store con id " + storeId);
+        }
+
+        //obtine los productos asociados al storeid
+        var existingProducts = productRepository.findProductByStoreId(storeId);
+        if (existingProducts.isEmpty())
+            throw new ResourceNotFoundException("No existe ningun producto para el store con id "+storeId);
+
+        // Muestra la lista de productos asociados al store
+        var toShowProducts = existingProducts.stream()
+                .map(Product -> modelMapper.map(Product, ProductResponse.class))
+                .toList();
+
+        return toShowProducts;
     }
 
 
@@ -52,8 +73,8 @@ public class ProductServiceImpl implements IProductService {
     public ProductResponse createProduct(ProductRequest productRequest, Long storeId) {
 
         // Buscar el negocioalq ue pertenece
-        //var store = customerRepository.findById(customerId)
-        //        .orElseThrow(() -> new ResourceNotFoundException("No se encontró el cliente con ID: " + customerId));
+        var existingStore = storeRepository.findById(storeId)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el un store con ID: " + storeId));
 
         // Validación
         ProductValidation.ValidateProduct(productRequest);
@@ -61,8 +82,10 @@ public class ProductServiceImpl implements IProductService {
         // Mapeo
         var newProduct = modelMapper.map(productRequest, Product.class);
 
-        var savedProduct = productRepository.save(newProduct);
-        var response = modelMapper.map(savedProduct, ProductResponse.class);
+        newProduct.setStore(existingStore); //asocia el producto a un store
+
+        var createProduct = productRepository.save(newProduct);
+        var response = modelMapper.map(createProduct, ProductResponse.class);
 
         return response;
     }
