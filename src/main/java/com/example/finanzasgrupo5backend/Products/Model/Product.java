@@ -1,11 +1,12 @@
 package com.example.finanzasgrupo5backend.Products.Model;
 
 import com.example.finanzasgrupo5backend.Profile.Model.Store;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @Builder
