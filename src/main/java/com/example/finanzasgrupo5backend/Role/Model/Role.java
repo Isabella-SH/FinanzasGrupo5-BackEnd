@@ -1,7 +1,7 @@
 package com.example.finanzasgrupo5backend.Role.Model;
 
 import com.example.finanzasgrupo5backend.Users.Model.Users;
-import jakarta.persistence.*;
+import javax.persistence.*;
 @Entity
 @Table(name = "roles", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "rol" }) })
 public class Role {

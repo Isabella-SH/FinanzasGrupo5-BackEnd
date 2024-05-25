@@ -1,7 +1,7 @@
 package com.example.finanzasgrupo5backend.Users.Model;
 
 import com.example.finanzasgrupo5backend.Role.Model.Role;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.List;
 
