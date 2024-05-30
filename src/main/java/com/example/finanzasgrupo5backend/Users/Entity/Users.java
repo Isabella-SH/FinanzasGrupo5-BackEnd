@@ -1,3 +1,5 @@
+
+
 package com.example.finanzasgrupo5backend.Users.Entity;
 
 import com.example.finanzasgrupo5backend.Role.Entity.Role;

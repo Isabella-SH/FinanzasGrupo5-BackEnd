@@ -1,6 +1,6 @@
 package com.example.finanzasgrupo5backend.Users.Service;
 
-import com.example.finanzasgrupo5backend.Users.Model.Users;
+import com.example.finanzasgrupo5backend.Users.Entity.Users;
 
 import java.util.List;
 

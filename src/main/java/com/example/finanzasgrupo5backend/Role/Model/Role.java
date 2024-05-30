@@ -1,3 +1,5 @@
+/*
+
 package com.example.finanzasgrupo5backend.Role.Model;
 
 import com.example.finanzasgrupo5backend.Users.Model.Users;
@@ -43,3 +45,6 @@ public class Role {
         this.rol = rol;
     }
 }
+
+
+*/

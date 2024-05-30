@@ -1,6 +1,6 @@
 package com.example.finanzasgrupo5backend.Users.Controller;
 
-import com.example.finanzasgrupo5backend.Users.Model.Users;
+import com.example.finanzasgrupo5backend.Users.Entity.Users;
 import com.example.finanzasgrupo5backend.Users.Model.UsersResponse;
 import com.example.finanzasgrupo5backend.Users.Service.IUserService;
 import org.modelmapper.ModelMapper;

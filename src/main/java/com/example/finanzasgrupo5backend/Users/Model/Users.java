@@ -1,3 +1,4 @@
+/*
 package com.example.finanzasgrupo5backend.Users.Model;
 
 import com.example.finanzasgrupo5backend.Role.Model.Role;
@@ -53,3 +54,4 @@ public class Users {
         this.roles = roles;
     }
 }
+*/
