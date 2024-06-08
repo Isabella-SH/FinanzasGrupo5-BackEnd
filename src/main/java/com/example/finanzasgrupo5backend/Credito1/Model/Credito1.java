@@ -28,16 +28,19 @@ public class Credito1 {
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;
 
-    @Column(name = "TEP",nullable = false)
-    private Boolean TEP;
+    @Column(name = "TEoN",nullable = false)
+    private Boolean TEoN;
 
-    @Column(name = "TNP",nullable = false)
-    private Boolean TNP;
+    @Column(name = "TEP")
+    private String TEP;
+
+    @Column(name = "TNP")
+    private String TNP;
 
     @Column(name = "tasa", nullable = false)
     private Long tasa;
 
-    @Column(name = "perio_capitalizacion", nullable = false)
+    @Column(name = "perio_capitalizacion")
     private Long perio_capitalizacion;
 
     //muchos creditos pertenecen a un cliente

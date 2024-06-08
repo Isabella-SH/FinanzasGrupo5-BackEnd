@@ -101,7 +101,7 @@ public class Credito1ServiceImpl implements ICredito1Service {
     }
 
     @Override
-    public Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, Boolean TEP, Boolean TNP,
+    public Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, Boolean TEoN,String TEP, String TNP,
                                             Long tasa, Long perio_capitalizacion, Long clienteId) {
 
         // Buscar el producto
@@ -109,7 +109,7 @@ public class Credito1ServiceImpl implements ICredito1Service {
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un credito1 con el id: " + id));
 
 
-
+        credito1.setTEoN(TEoN);
         credito1.setTEP(TEP);
         credito1.setTNP(TNP);
         credito1.setTasa(tasa);
