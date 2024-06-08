@@ -111,7 +111,7 @@ public class ConsumoCredito1ServiceImpl implements IConsumoCredito1Service{
         // Mapeo
         var newConsumo = modelMapper.map(consumo, ConsumoCredito1.class);
 
-        newConsumo.setCredito1(existingCredito1); //asocia el producto a un store
+        newConsumo.setCredito1(existingCredito1); //asocia el consumo a un credito1
 
             //obtener datos
         LocalDate fechaI= newConsumo.getFechaInicial();

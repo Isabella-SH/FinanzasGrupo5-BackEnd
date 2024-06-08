@@ -29,19 +29,19 @@ public class Credito1 {
     private LocalDate fechaFinal;
 
     @Column(name = "TEoN",nullable = false)
-    private String TEoN;
+    private String TEoN;  //E -> EFECTIVA  N->NOMIMAL
 
     @Column(name = "TEP")
-    private String TEP;
+    private String TEP; //mensual, trimestral ...
 
     @Column(name = "TNP")
-    private String TNP;
+    private String TNP; //mensual, trimestral . ...
 
     @Column(name = "tasa", nullable = false)
     private Long tasa;
 
     @Column(name = "perio_capitalizacion")
-    private String perio_capitalizacion;
+    private String perio_capitalizacion; //quincenal , diaria ,....
 
     //muchos creditos pertenecen a un cliente
     @ManyToOne
