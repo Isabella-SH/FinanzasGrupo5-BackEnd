@@ -101,8 +101,8 @@ public class Credito1ServiceImpl implements ICredito1Service {
     }
 
     @Override
-    public Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, Boolean TEoN,String TEP, String TNP,
-                                            Long tasa, Long perio_capitalizacion, Long clienteId) {
+    public Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEoN,String TEP, String TNP,
+                                            Long tasa, String perio_capitalizacion, Long clienteId) {
 
         // Buscar el producto
         var credito1 = credito1Repository.findById(id)

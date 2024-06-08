@@ -20,8 +20,8 @@ public interface ICredito1Service {
     //POST
     Credito1Response createCredito1(Credito1Request credito1Request, Long clienteId);
 
-    public abstract Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, Boolean TEoN,String TEP, String TNP,
-                                                    Long tasa, Long perio_capitalizacion, Long clienteId);
+    public abstract Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEoN,String TEP, String TNP,
+                                                    Long tasa, String perio_capitalizacion, Long clienteId);
 
     public abstract Credito1Response deleteCredito1(Long id);
 

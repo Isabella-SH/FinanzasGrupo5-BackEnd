@@ -50,8 +50,8 @@ public class Credito1Controller {
     @Operation(summary = "Update a c")
     @PatchMapping("/clienteId/{id}")
     public ResponseEntity<Credito1Response> updateCredito1(@PathVariable(name = "id") Long creditoId,
-                                                           @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal, @RequestParam Boolean TEoN,@RequestParam String TEP, @RequestParam String TNP,
-                                                           @RequestParam Long tasa, @RequestParam Long perio_capitalizacion) {
+                                                           @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal, @RequestParam String TEoN,@RequestParam String TEP, @RequestParam String TNP,
+                                                           @RequestParam Long tasa, @RequestParam String perio_capitalizacion) {
 
         long clienteId=1;
         var res = credito1Service.updateCredito1(creditoId, fechaInicial, fechaFinal, TEoN,TEP, TNP,
