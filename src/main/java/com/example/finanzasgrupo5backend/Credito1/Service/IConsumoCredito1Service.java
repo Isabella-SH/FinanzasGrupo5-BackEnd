@@ -20,6 +20,6 @@ public interface IConsumoCredito1Service {
 
     public abstract ConsumoCredito1Response updateConsumo(Long id, String product, Long price, Long creditoId);
 
-    public abstract ConsumoCredito1Response deleteConsumo(Long id, ConsumoCredito1 consumo);
+    public abstract ConsumoCredito1Response deleteConsumo(Long id);
 
 }

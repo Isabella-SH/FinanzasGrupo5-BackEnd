@@ -15,11 +15,11 @@ public class Credito1Request {
 
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-    private Boolean TEoN;
+    private String TEoN;
     private String TEP;
     private String TNP;
     private Long tasa;
-    private Long perio_capitalizacion;
+    private String perio_capitalizacion;
 
     //private Client client;
 

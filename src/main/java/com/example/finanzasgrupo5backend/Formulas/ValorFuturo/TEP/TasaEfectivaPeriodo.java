@@ -19,7 +19,7 @@ public class TasaEfectivaPeriodo {
 
     /////////////////////////////////////////////////////////////////
 
-    public static float numeroDiasPeriodo(String tep) {
+    public static long numeroDiasPeriodo(String tep) {
 
         if(tep.equals("TEM")) { return 30; }
         if(tep.equals("TEQ")) { return 15; }
@@ -31,30 +31,34 @@ public class TasaEfectivaPeriodo {
         return 0;
     }
 
-    public static float numeroDiasTrasladar(LocalDate fechaI, LocalDate fechaF) {
+    public static long numeroDiasTrasladar(LocalDate fechaI, LocalDate fechaF) {
         return ChronoUnit.DAYS.between(fechaI, fechaF);
     }
 
-    public static float montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String tep, Float tasa, Float precio) {
+    public static long montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String tep, long tasa, long precio) {
         // s = c (1 + tep) ^ (ndt / ndp)
-        float interes= tasa/100;
-        float ndp = numeroDiasPeriodo(tep);
-        float ndt = numeroDiasTrasladar(fechaI, fechaF);
+        long interes= tasa/100;
+        long ndp = numeroDiasPeriodo(tep);
+        long ndt = numeroDiasTrasladar(fechaI, fechaF);
 
-        float s = (float) (precio * Math.pow((1 + interes), (ndt / ndp)));
+        long s = (long) (precio * Math.pow((1 + interes), (ndt / ndp)));
 
         return s;
     }
 
-    public static float calcularInteresMoratorio(String tep, float tasa, float valorNominal, float diasAtraso){
+    public static long calcularInteresMoratorio(String tep, long tasa, long valorNominal, long diasAtraso){
 
         //Im= valor nominal [(1+tep)^(diastrasladar/diastep)  -1]
-        float ndp= numeroDiasPeriodo(tep);
-        float interes= tasa/100;
+        long ndp= numeroDiasPeriodo(tep);
+        long interes= tasa/100;
 
-        float interesMoratorio = (float) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp))-1));
+        long interesMoratorio = (long) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp))-1));
 
         return interesMoratorio;
+    }
+
+    public static long interes(long tasa, long precio){
+        return precio * (tasa/100);
     }
 
 }

@@ -29,7 +29,7 @@ public class Credito1 {
     private LocalDate fechaFinal;
 
     @Column(name = "TEoN",nullable = false)
-    private Boolean TEoN;
+    private String TEoN;
 
     @Column(name = "TEP")
     private String TEP;
@@ -41,7 +41,7 @@ public class Credito1 {
     private Long tasa;
 
     @Column(name = "perio_capitalizacion")
-    private Long perio_capitalizacion;
+    private String perio_capitalizacion;
 
     //muchos creditos pertenecen a un cliente
     @ManyToOne

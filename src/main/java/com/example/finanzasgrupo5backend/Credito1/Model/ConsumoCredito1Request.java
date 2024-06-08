@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -17,10 +16,6 @@ public class ConsumoCredito1Request {
     private Long precio;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-    private Long diasTrasladar;
-    private Long diasTasaPeriodo;
-    private Long interes;
-    private Long montoConsumo;
 
-    //private Credito1 credito1;
+    //id del credito pedido en el controller
 }

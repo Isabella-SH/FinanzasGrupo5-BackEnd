@@ -16,13 +16,8 @@ public class ConsumoCredito1Response {
     private Long precio;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
-    private Long diasTrasladar;
-    private Long diasTasaPeriodo;
     private Long interes;
     private Long montoConsumo;
 
-    //cronograma
-
     private Credito1 credito1;
-
 }

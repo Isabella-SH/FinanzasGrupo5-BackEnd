@@ -33,20 +33,11 @@ public class ConsumoCredito1 {
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;
 
-    @Column(name = "dias_trasladar", nullable = false)
-    private Long diasTrasladar;
-
-    @Column(name = "dias_tasa_periodo", nullable = false)
-    private Long diasTasaPeriodo;
-
     @Column(name = "interes", nullable = false)
     private Long interes;
 
     @Column(name = "monto_consumo", nullable = false)
     private Long montoConsumo;
-
-    //muchos consumos pertenecen aun cronograma
-
 
     //muchos consumos pertenecen a un credito
     @ManyToOne
