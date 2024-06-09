@@ -36,30 +36,14 @@ public class TasaNominalPeriodo {
 
     public static long numeroDiasPeriodoCapitalizacion(String ten) {
 
-        if (ten.equals("diario")) {
-            return 1;
-        }
-        if (ten.equals("quincel")) {
-            return 15;
-        }
-        if (ten.equals("mensual")) {
-            return 30;
-        }
-        if (ten.equals("bimestral")) {
-            return 60;
-        }
-        if (ten.equals("trimestral")) {
-            return 90;
-        }
-        if (ten.equals("cuatrimestral")) {
-            return 120;
-        }
-        if (ten.equals("semestral")) {
-            return 180;
-        }
-        if (ten.equals("anual")) {
-            return 360;
-        }
+        if (ten.equals("diario")) {             return 1;        }
+        if (ten.equals("quincenal")) {            return 15;        }
+        if (ten.equals("mensual")) {            return 30;        }
+        if (ten.equals("bimestral")) {            return 60;        }
+        if (ten.equals("trimestral")) {            return 90;        }
+        if (ten.equals("cuatrimestral")) {            return 120;        }
+        if (ten.equals("semestral")) {            return 180;        }
+        if (ten.equals("anual")) {            return 360;        }
         return 0;
     }
 

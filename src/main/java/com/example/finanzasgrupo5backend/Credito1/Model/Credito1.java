@@ -23,25 +23,25 @@ public class Credito1 {
     private Long id;
 
     @Column(name = "fechaInicial",nullable = false)
-    private LocalDate fechaInicial;
+    private LocalDate fechaInicial;  // yyyy-mm-dd
 
     @Column(name = "fechaFinal",nullable = false)
-    private LocalDate fechaFinal;
+    private LocalDate fechaFinal;   // yyyy-mm-dd
 
     @Column(name = "TEoN",nullable = false)
     private String TEoN;  //E -> EFECTIVA  N->NOMIMAL
 
     @Column(name = "TEP")
-    private String TEP; //mensual, trimestral ...
+    private String TEP; //TEM , TEA , ...  checkbox
 
     @Column(name = "TNP")
-    private String TNP; //mensual, trimestral . ...
+    private String TNP; //TNM , TNQ , ... checkbox
 
     @Column(name = "tasa", nullable = false)
-    private Long tasa;
+    private Long tasa; //enviar solo numero  sin porcentaje
 
     @Column(name = "perio_capitalizacion")
-    private String perio_capitalizacion; //quincenal , diaria ,....
+    private String perio_capitalizacion; //quincenal , diaria ,.... , checkbox
 
     //muchos creditos pertenecen a un cliente
     @ManyToOne

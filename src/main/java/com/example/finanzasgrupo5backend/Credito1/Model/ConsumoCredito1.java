@@ -28,7 +28,7 @@ public class ConsumoCredito1 {
     private Long precio;
 
     @Column(name = "fechaInicial",nullable = false)
-    private LocalDate fechaInicial;
+    private LocalDate fechaInicial;  //yyyy-mm-dd
 
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;

@@ -28,6 +28,7 @@ public class TasaEfectivaPeriodo {
         if(tep.equals("TED")) { return 1; }
         if(tep.equals("TEC")) { return 120; }
         if(tep.equals("TET")) { return 90; }
+        if(tep.equals("TEB")) { return 60; }
         return 0;
     }
 
