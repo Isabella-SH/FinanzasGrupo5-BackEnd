@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class UserServiceImpl implements IUserService {
-    @Autowired
+
     IUserRepository userRepository;
     @Override
     public void insertUser(Users users) {
