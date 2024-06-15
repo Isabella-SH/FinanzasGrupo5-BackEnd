@@ -53,4 +53,25 @@ public class ConsumoCredito1Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Sum total of consumos by credito1")
+    @GetMapping("/consumos-credito1/sum/{creditoId}")
+    public ResponseEntity<Long> sumTotalConsumoByCredito1(@PathVariable(name = "creditoId") Long creditoId) {
+        var res = consumoCredito1Service.sumTotalConsumoByCredito1(creditoId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Sum total of consumos by client")
+    @GetMapping("/consumos-credito1/sum/client/{clientId}")
+    public ResponseEntity<Long> sumTotalConsumoByClientId(@PathVariable(name = "clientId") Long clientId) {
+        var res = consumoCredito1Service.sumTotalConsumoByClientId(clientId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Sum total of consumos by client and credito")
+    @GetMapping("/consumos-credito1/sum/client/{clientId}/credito/{creditoId}")
+    public ResponseEntity<Long> sumTotalConsumoByClientIdAndCreditoId(@PathVariable(name = "clientId") Long clientId, @PathVariable(name = "creditoId") Long creditoId) {
+        var res = consumoCredito1Service.sumTotalConsumoByClientIdAndCreditoId(clientId, creditoId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

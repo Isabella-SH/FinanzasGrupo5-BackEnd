@@ -1,6 +1,6 @@
 package com.example.finanzasgrupo5backend.Credito1.Model;
 
-import com.example.finanzasgrupo5backend.Clients.Model.Client;
+import com.example.finanzasgrupo5backend.Cronograma.ValorFuturo.Model.CronogramaValorFuturo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class ConsumoCredito1 {
     private Long precio;
 
     @Column(name = "fechaInicial",nullable = false)
-    private LocalDate fechaInicial;
+    private LocalDate fechaInicial; //fecha de pago
 
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;
@@ -43,5 +43,8 @@ public class ConsumoCredito1 {
     @ManyToOne
     @JoinColumn(name = "creditos1", nullable = false)
     private Credito1 credito1;
+
+
+
 
 }
