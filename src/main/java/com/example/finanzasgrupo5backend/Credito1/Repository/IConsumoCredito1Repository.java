@@ -24,23 +24,25 @@ public interface IConsumoCredito1Repository extends JpaRepository<ConsumoCredito
     List<ConsumoCredito1> findByFechaInicial(LocalDate fechaFinal);
 
     //suma total por credito
-    @Query("SELECT sum(monto_consumo) FROM consumo_credito1 WHERE credito1 = :creditoId")
-    Long sumTotalConsumoByCredito1(@Param("creditoId") Long creditoId);
+
+
 
 
     //suma total de consumos por id del cliente
-    @Query("SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
-            "join creditos1 as cd on cd.id = cc.creditos1" +
-            "join clients as cl on cl.id = cd.client" +
-            "where cl.id = :clientId" +
-            "group by cl.id")
-    Long sumTotalConsumoByClientId(@Param("clientId") Long clientId);
+    @Query(value = "SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
+            "            join creditos1 as cd on cd.id = cc.id_creditos1" +
+            "            join client as cl on cl.id = cd.client" +
+            "            where cd.client = :id" +
+            "            group by cd.client", nativeQuery = true)
+    Long sumTotalConsumoByClientId(@Param("id") Long clientId);
 
-    //suma total de consumos por id de cliente y por id de credito
-    @Query("SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
-            "join creditos1 as cd on cd.id = cc.creditos1" +
-            "join clients as cl on cl.id = cd.client" +
-            "where cl.id = :clientId and cd.id = :creditoId" +
-            "group by cl.id")
-    Long sumTotalConsumoByClientIdAndCreditoId(@Param("clientId") Long clientId, @Param("creditoId") Long creditoId);
+    @Query(value = "SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
+            "            join creditos1 as cd on cd.id = cc.id_creditos1" +
+            "            join client as cl on cl.id = cd.client" +
+            "            where cc.id_creditos1 = :id" +
+            "            group by cc.id_creditos1", nativeQuery = true)
+    Long sumTotalConsumoByCreditoId(@Param("id") Long creditoId);
+
+
+
 }

@@ -41,7 +41,7 @@ public class ConsumoCredito1 {
 
     //muchos consumos pertenecen a un credito
     @ManyToOne
-    @JoinColumn(name = "creditos1", nullable = false)
+    @JoinColumn(name = "id_creditos1", nullable = false)
     private Credito1 credito1;
 
 
