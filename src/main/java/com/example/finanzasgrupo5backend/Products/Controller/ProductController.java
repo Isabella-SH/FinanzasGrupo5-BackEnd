@@ -51,7 +51,7 @@ public class ProductController {
     @PatchMapping("/products/{id}")
     public ResponseEntity<ProductResponse> updateProduct(@PathVariable(name = "id") Long productId, @RequestParam String name, @RequestParam Long price) {
         long storeId=1;
-        var res = productService.updateProduct(productId, name, price, storeId);
+        var res = productService.updateProduct(productId, name, price, Long.valueOf(storeId));
         if (res == null) {
             return ResponseEntity.notFound().build();
         }

@@ -21,4 +21,5 @@ public interface IConsumoCredito1Repository extends JpaRepository<ConsumoCredito
 
     List<ConsumoCredito1> findByFechaInicial(LocalDate fechaFinal);
 
+    public abstract Long sumTotalConsumoByCreditoId(Long creditoId);
 }

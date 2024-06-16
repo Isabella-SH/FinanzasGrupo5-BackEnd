@@ -55,7 +55,7 @@ public class Credito1Controller {
 
         long clienteId=1;
         var res = credito1Service.updateCredito1(creditoId, fechaInicial, fechaFinal, TEoN,TEP, TNP,
-                tasa, perio_capitalizacion,clienteId);
+                tasa, perio_capitalizacion, Long.valueOf(clienteId));
         if (res == null) {
             return ResponseEntity.notFound().build();
         }
