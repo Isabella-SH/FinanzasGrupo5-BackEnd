@@ -9,6 +9,7 @@ import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundExcept
 import com.example.finanzasgrupo5backend.Validations.MoraCreditos1Validation;
 import com.example.finanzasgrupo5backend.Validations.PagoCredito1Validation;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,15 @@ import java.util.List;
 @Service
 @Qualifier("pagoCredito1ServiceImpl")
 public class PagoCredito1ServiceImpl implements IPagoCredito1Service{
-
-    private final IMoraCredito1Repository moraCredito1Repository;
-    private final ICredito1Repository credito1Repository;
-    private final IConsumoCredito1Repository consumoCredito1Repository;
-    private final IPagoCredito1Repository pagoCredito1Repository;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private  IMoraCredito1Repository moraCredito1Repository;
+    @Autowired
+    private  ICredito1Repository credito1Repository;
+    @Autowired
+    private  IConsumoCredito1Repository consumoCredito1Repository;
+    @Autowired
+    private  IPagoCredito1Repository pagoCredito1Repository;
+    private  ModelMapper modelMapper;
 
     public PagoCredito1ServiceImpl(IMoraCredito1Repository moraCredito1Repository, ICredito1Repository credito1Repository, IConsumoCredito1Repository consumoCredito1Repository, IPagoCredito1Repository pagoCredito1Repository, ModelMapper modelMapper) {
         this.moraCredito1Repository = moraCredito1Repository;
@@ -69,32 +73,38 @@ public class PagoCredito1ServiceImpl implements IPagoCredito1Service{
     }
 
     @Override
-    public PagoCredito1Response createPagoCredito1(IMoraCredito1Service moraCredito1Service, PagoCredito1Request pagoCredito1Request, Long creditoId) {
+    public PagoCredito1Response createPagoCredito1(Long creditoId) {
 
         // Buscar el pago en el credito
         var existingCredito1 = credito1Repository.findById(creditoId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró un credito1 con ID: " + creditoId));
 
-        // Validación
-        PagoCredito1Validation.ValidatePagoCredito1(pagoCredito1Request);
+        var existingMoraCredito1 = moraCredito1Repository.findMoraByCredito1Id(creditoId);
+
+
 
         // Mapeo
-        var newPago = modelMapper.map(pagoCredito1Request, PagoCredito1.class);
+        var newPago = new PagoCredito1();
 
         newPago.setCredito1(existingCredito1); //asocia el consumo a un credito1
 
         // obtener datos
+        Long total_moras = 0L;
+        Boolean pagado = true;
+        if (!existingMoraCredito1.isEmpty())
+        {
+            total_moras = existingMoraCredito1.stream().mapToLong(Mora -> Mora.getTotal_moras()).sum();
+        }
 
-        Boolean pagado = newPago.getPagado();
-
-        Long total_moras = newPago.getMoraCredito1().getTotal_moras();
         newPago.setTotal_moras(total_moras);
 
-        Long total_monto_consumos = moraCredito1Service.sumTotalConsumoByCreditoId(creditoId);
+
+        Long total_monto_consumos = consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
         newPago.setTotal_monto_consumos(total_monto_consumos);
 
         Long monto_pagar = (Long) (total_moras + total_monto_consumos);
         newPago.setMonto_a_pagar(monto_pagar);
+        newPago.setCredito1(existingCredito1);
 
         var createPago = pagoCredito1Repository.save(newPago);
         var response = modelMapper.map(createPago, PagoCredito1Response.class);

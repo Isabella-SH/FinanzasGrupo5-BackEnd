@@ -35,12 +35,14 @@ public class MoraCredito1Controller {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
+    /*
     @Operation(summary = "Sum consumos by credito id")
     @GetMapping("/consumos-credito1/credito/{id}")
     public ResponseEntity<Long> sumTotalConsumoByCreditoId(@PathVariable("id") Long creditoId) {
         var res = moraCredito1Service.sumTotalConsumoByCreditoId(creditoId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    */
 
     @Operation(summary = "Obtain a list of all moras credito 1")
     @GetMapping("/mora-credito1")

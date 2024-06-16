@@ -38,4 +38,52 @@ public class MoraCredito1 {
     @ManyToOne
     @JoinColumn(name = "credito1_id", nullable = false)
     private Credito1 credito1;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTEPm() {
+        return TEPm;
+    }
+
+    public void setTEPm(String TEPm) {
+        this.TEPm = TEPm;
+    }
+
+    public Long getTasa() {
+        return tasa;
+    }
+
+    public void setTasa(Long tasa) {
+        this.tasa = tasa;
+    }
+
+    public Long getDias_atraso() {
+        return dias_atraso;
+    }
+
+    public void setDias_atraso(Long dias_atraso) {
+        this.dias_atraso = dias_atraso;
+    }
+
+    public Long getTotal_moras() {
+        return total_moras;
+    }
+
+    public void setTotal_moras(Long total_moras) {
+        this.total_moras = total_moras;
+    }
+
+    public Credito1 getCredito1() {
+        return credito1;
+    }
+
+    public void setCredito1(Credito1 credito1) {
+        this.credito1 = credito1;
+    }
 }

@@ -53,4 +53,11 @@ public class ConsumoCredito1Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Sum consumos by credito id")
+    @GetMapping("/consumos-credito1/credito/{id}")
+    public ResponseEntity<Long> sumTotalConsumoByCreditoId(@PathVariable("id") Long creditoId) {
+        var res = consumoCredito1Service.sumTotalConsumoByCreditoId(creditoId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

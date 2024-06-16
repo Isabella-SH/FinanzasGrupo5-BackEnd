@@ -22,4 +22,5 @@ public interface IConsumoCredito1Service {
 
     public abstract ConsumoCredito1Response deleteConsumo(Long id);
 
+    public abstract Long sumTotalConsumoByCreditoId(Long creditoId);
 }

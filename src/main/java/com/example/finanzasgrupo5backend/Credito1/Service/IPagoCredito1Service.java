@@ -13,7 +13,7 @@ public interface IPagoCredito1Service {
 
     //falta pago by mora
 
-    PagoCredito1Response createPagoCredito1(IMoraCredito1Service moraCredito1Service, PagoCredito1Request pagoCredito1Request, Long creditoId);
+    PagoCredito1Response createPagoCredito1(Long creditoId);
 
     public abstract PagoCredito1Response updatePagoCredito1(Long id, Long total_moras, Long total_monto_consumos, Long monto_a_pagar, Boolean pagado, Long credito1, Long moracredito1);
 

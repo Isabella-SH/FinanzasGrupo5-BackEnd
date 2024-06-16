@@ -28,9 +28,9 @@ public class PagoCredito1Controller {
     @Operation(summary = "Create a Pago-Credito1")
     @PostMapping("/pago-credito1")
     public ResponseEntity<PagoCredito1Response> createCredito1
-            (@RequestParam(name = "credito1Id") Long creditoId, @RequestBody IMoraCredito1Service moraCredito1Service, @RequestBody PagoCredito1Request pagoCredito1Request) {
+            (@RequestParam(name = "credito1Id") Long creditoId) {
 
-        var res = pagoCredito1Service.createPagoCredito1(moraCredito1Service, pagoCredito1Request, creditoId);
+        var res = pagoCredito1Service.createPagoCredito1(creditoId);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 

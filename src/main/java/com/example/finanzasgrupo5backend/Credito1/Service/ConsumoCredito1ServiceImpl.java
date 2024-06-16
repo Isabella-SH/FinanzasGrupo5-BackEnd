@@ -162,4 +162,9 @@ public class ConsumoCredito1ServiceImpl implements IConsumoCredito1Service{
 
         return response;
     }
+
+    @Override
+    public Long sumTotalConsumoByCreditoId(Long creditoId) {
+        return consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
+    }
 }

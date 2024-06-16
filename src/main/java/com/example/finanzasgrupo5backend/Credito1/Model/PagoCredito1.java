@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAnyAttribute;
 
 
 @Data
@@ -29,16 +30,12 @@ public class PagoCredito1 {
     @Column(name = "monto_a_pagar", nullable = false)
     private Long monto_a_pagar;
 
-    @Column(name = "pagado", nullable = false)
+    @Column(name = "pagado", nullable = true)
     private Boolean pagado;
 
     @ManyToOne
     @JoinColumn(name = "credito1_id", nullable = false)
     private Credito1 credito1;
-
-    @ManyToOne
-    @JoinColumn(name = "mora_id", nullable = false)
-    private MoraCredito1 moraCredito1;
 
 
 

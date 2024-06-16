@@ -61,6 +61,7 @@ public class Credito1Controller {
         }
         return ResponseEntity.ok(res);
     }
+
     @Operation(summary = "Delete a credito1")
     @DeleteMapping("/credito1/{id}")
     public ResponseEntity<Void> deleteCredito1(@PathVariable(name = "id") Long credito1Id) {

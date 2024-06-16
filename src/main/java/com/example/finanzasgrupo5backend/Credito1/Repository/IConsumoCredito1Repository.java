@@ -3,6 +3,8 @@ package com.example.finanzasgrupo5backend.Credito1.Repository;
 import com.example.finanzasgrupo5backend.Credito1.Model.ConsumoCredito1;
 import com.example.finanzasgrupo5backend.Products.Model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -21,5 +23,10 @@ public interface IConsumoCredito1Repository extends JpaRepository<ConsumoCredito
 
     List<ConsumoCredito1> findByFechaInicial(LocalDate fechaFinal);
 
-    public abstract Long sumTotalConsumoByCreditoId(Long creditoId);
+    @Query(value = "SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
+            "            join creditos1 as cd on cd.id = cc.id_creditos1" +
+            "            join client as cl on cl.id = cd.client" +
+            "            where cc.id_creditos1 = :id" +
+            "            group by cc.id_creditos1", nativeQuery = true)
+    Long sumTotalConsumoByCreditoId(@Param("id") Long creditoId);
 }
