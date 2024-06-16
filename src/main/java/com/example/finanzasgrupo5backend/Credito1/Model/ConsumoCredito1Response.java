@@ -13,11 +13,11 @@ public class ConsumoCredito1Response {
 
     private Long id;
     private String producto;
-    private Long precio;
-    private LocalDate fechaInicial;
-    private LocalDate fechaFinal;
-    private Long interes;
-    private Long montoConsumo;
+    private Double precio;
+    private String fechaInicial;
+    private String fechaFinal;
+    private Double interes;
+    private Double montoConsumo;
 
-    private Credito1 credito1;
+    private Long credito1;
 }

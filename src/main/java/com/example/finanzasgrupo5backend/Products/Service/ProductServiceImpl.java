@@ -4,8 +4,7 @@ import com.example.finanzasgrupo5backend.Products.Model.Product;
 import com.example.finanzasgrupo5backend.Products.Model.ProductRequest;
 import com.example.finanzasgrupo5backend.Products.Model.ProductResponse;
 import com.example.finanzasgrupo5backend.Products.Repository.IProductRepository;
-import com.example.finanzasgrupo5backend.Profile.Model.Store;
-import com.example.finanzasgrupo5backend.Profile.Repository.IStoreRepository;
+import com.example.finanzasgrupo5backend.Profile.Store.Repository.IStoreRepository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
 import com.example.finanzasgrupo5backend.Shared.exception.ValidationException;
 import com.example.finanzasgrupo5backend.Validations.ProductValidation;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Qualifier("productServiceImpl")

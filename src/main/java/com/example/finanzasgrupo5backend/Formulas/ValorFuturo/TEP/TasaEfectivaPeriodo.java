@@ -19,45 +19,45 @@ public class TasaEfectivaPeriodo {
 
     /////////////////////////////////////////////////////////////////
 
-    public static long numeroDiasPeriodo(String tep) {
+    public static Double numeroDiasPeriodo(String tep) {
 
-        if(tep.equals("TEM")) { return 30; }
-        if(tep.equals("TEQ")) { return 15; }
-        if(tep.equals("TES")) { return 180; }
-        if(tep.equals("TEA")) { return 360; }
-        if(tep.equals("TED")) { return 1; }
-        if(tep.equals("TEC")) { return 120; }
-        if(tep.equals("TET")) { return 90; }
-        return 0;
+        if(tep.equals("TEM")) { return 30D; }
+        if(tep.equals("TEQ")) { return 15D; }
+        if(tep.equals("TES")) { return 180D; }
+        if(tep.equals("TEA")) { return 360D; }
+        if(tep.equals("TED")) { return 1D; }
+        if(tep.equals("TEC")) { return 120D; }
+        if(tep.equals("TET")) { return 90D; }
+        return 0D;
     }
 
     public static long numeroDiasTrasladar(LocalDate fechaI, LocalDate fechaF) {
         return ChronoUnit.DAYS.between(fechaI, fechaF);
     }
 
-    public static long montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String tep, long tasa, long precio) {
+    public static Double montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String tep, Double tasa, Double precio) {
         // s = c (1 + tep) ^ (ndt / ndp)
-        long interes= tasa/100;
-        long ndp = numeroDiasPeriodo(tep);
+        Double interes= tasa/100D;
+        Double ndp = numeroDiasPeriodo(tep);
         long ndt = numeroDiasTrasladar(fechaI, fechaF);
 
-        long s = (long) (precio * Math.pow((1 + interes), (ndt / ndp)));
+        Double s = (Double) (precio * Math.pow((1 + interes), (ndt / ndp)));
 
         return s;
     }
 
-    public static long calcularInteresMoratorio(String tep, long tasa, long valorNominal, long diasAtraso){
+    public static Double calcularInteresMoratorio(String tep, Double tasa, Double valorNominal, long diasAtraso){
 
         //Im= valor nominal [(1+tep)^(diastrasladar/diastep)  -1]
-        long ndp= numeroDiasPeriodo(tep);
-        long interes= tasa/100;
+        Double ndp= numeroDiasPeriodo(tep);
+        Double interes= tasa/100;
 
-        long interesMoratorio = (long) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp))-1));
+        Double interesMoratorio = (Double) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp))-1));
 
         return interesMoratorio;
     }
 
-    public static long interes(long tasa, long precio){
+    public static Double interes(Double tasa, Double precio){
         return precio * (tasa/100);
     }
 

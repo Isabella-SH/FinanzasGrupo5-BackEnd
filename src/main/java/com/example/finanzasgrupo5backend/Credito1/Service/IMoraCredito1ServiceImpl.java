@@ -69,7 +69,7 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
     }
 
     @Override
-    public MoraCredito1Response createMoraCredito1(ConsumoCredito1 consumoCredito1, ConsumoCredito1Request consumo, MoraCredito1Request moracredito1Request, Long creditoId) {
+    public MoraCredito1Response createMoraCredito1(MoraCredito1Request moracredito1Request, Long creditoId) {
         // Buscar si mora en el credito
         var existingCredito1 = credito1Repository.findById(creditoId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró un credito1 con ID: " + creditoId));
@@ -81,16 +81,20 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
         var newMora = modelMapper.map(moracredito1Request, MoraCredito1.class);
 
         newMora.setCredito1(existingCredito1); //asocia el consumo a un credito1
-
+        System.out.println(moracredito1Request);
+        System.out.println(newMora.getDias_atraso());
         //obtener datos
         String TEPm = newMora.getTEPm();
-        Long tasa = newMora.getTasa();
+        Double tasa = newMora.getTasa();
         Long dias_atraso = newMora.getDias_atraso();
 
 
+
         //setear datos
-        Long totalMoras = TasaEfectivaPeriodo.calcularInteresMoratorio(TEPm, tasa, sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+        Double totalMoras = TasaEfectivaPeriodo.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+
         newMora.setTotal_moras(totalMoras);
+
 
 
         var createMora = moraCredito1Repository.save(newMora);
@@ -101,13 +105,7 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
 
 
     @Override
-    public Long sumTotalConsumoByCreditoId(Long creditoId) {
-        return consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
-    }
-
-
-    @Override
-    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Long tasa, Long dias_atraso, Long total_moras, Long credito1) {
+    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Double total_moras, Long credito1) {
         // Buscar el mora
         var mora = moraCredito1Repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un mora con el id: " + id));

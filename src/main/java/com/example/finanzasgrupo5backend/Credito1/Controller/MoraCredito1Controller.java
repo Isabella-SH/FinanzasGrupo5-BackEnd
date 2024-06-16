@@ -28,10 +28,10 @@ public class MoraCredito1Controller {
     @Operation(summary = "Create a MoraCredito1")
     @PostMapping("/mora-credito1")
     public ResponseEntity<MoraCredito1Response> createMoraCredito1
-            (@RequestParam(name = "credito1Id") Long creditoId, @RequestBody MoraCredito1Request moraCredito1Request, @RequestBody ConsumoCredito1Request consumoCredito1Request, @RequestBody ConsumoCredito1 consumoCredito1) {
+            (@RequestParam(name = "credito1Id") Long creditoId, @RequestBody MoraCredito1Request moraCredito1Request) {
 
 
-        var res = moraCredito1Service.createMoraCredito1(consumoCredito1, consumoCredito1Request, moraCredito1Request,creditoId);
+        var res = moraCredito1Service.createMoraCredito1(moraCredito1Request,creditoId);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
@@ -61,7 +61,7 @@ public class MoraCredito1Controller {
     @Operation(summary = "Update a mora-credito1")
     @PatchMapping("/moras-credito1/{id}")
     public ResponseEntity<MoraCredito1Response> updateMoraCredito1(@PathVariable(name = "id") Long moraCredito1Id,
-                                                           @RequestParam String TEPm, @RequestParam Long tasa, @RequestParam Long dias_atraso, @RequestParam Long total_moras){
+                                                           @RequestParam String TEPm, @RequestParam Double tasa, @RequestParam Long dias_atraso, @RequestParam Double total_moras){
 
 
         long credito1Id=1;

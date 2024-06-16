@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Consumo Credito1 Controller")
@@ -38,6 +39,7 @@ public class ConsumoCredito1Controller {
         var res = consumoCredito1Service.getAllConsumosCredito1();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    /*
 
     @Operation(summary = "Obtain a list of consumos credito1 by credito Id")
     @GetMapping("/consumos-credito1/credito1/{id}")
@@ -45,6 +47,33 @@ public class ConsumoCredito1Controller {
         var res = consumoCredito1Service.getConsumosByCredito1Id(credito1Id);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    */
+
+    @Operation(summary = "List consumos by credito1 id")
+    @GetMapping("/consumos-credito1/credito/listar/{id}")
+    public ResponseEntity<List<ConsumoCredito1Response>> listConsumosByCredito(@PathVariable("id") Long creditoId) {
+        List<String[]> lista = consumoCredito1Service.listConsumosByCredito(creditoId);
+
+        List<ConsumoCredito1Response> listadto =new ArrayList<>();
+
+        for(String[] data:lista){
+            ConsumoCredito1Response dto =  new ConsumoCredito1Response();
+            dto.setId(Long.parseLong(data[0]));
+            dto.setProducto(data[1]);
+            dto.setPrecio(Double.parseDouble(data[2]));
+            dto.setFechaInicial(data[3]);
+            dto.setFechaFinal(data[4]);
+            dto.setInteres(Double.parseDouble(data[5]));
+            dto.setMontoConsumo(Double.parseDouble(data[6]));
+            dto.setCredito1(Long.parseLong(data[7]));
+            listadto.add(dto);
+        }
+        var res = listadto;
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+
+
 
     @Operation(summary = "Delete a consumo credito1")
     @DeleteMapping("/consumos-credito1/{id}")
@@ -55,7 +84,7 @@ public class ConsumoCredito1Controller {
 
     @Operation(summary = "Sum consumos by credito id")
     @GetMapping("/consumos-credito1/credito/{id}")
-    public ResponseEntity<Long> sumTotalConsumoByCreditoId(@PathVariable("id") Long creditoId) {
+    public ResponseEntity<Double> sumTotalConsumoByCreditoId(@PathVariable("id") Long creditoId) {
         var res = consumoCredito1Service.sumTotalConsumoByCreditoId(creditoId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

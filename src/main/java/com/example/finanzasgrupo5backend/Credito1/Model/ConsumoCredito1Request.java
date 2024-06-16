@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class ConsumoCredito1Request {
 
     private String producto;
-    private Long precio;
+    private Double precio;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
 

@@ -51,7 +51,7 @@ public class PagoCredito1Controller {
     @Operation(summary = "Update a pago-credito1")
     @PatchMapping("/pago-credito1/{id}")
     public ResponseEntity<PagoCredito1Response> updatePagoCredito1(@PathVariable(name = "id") Long pagoId,
-                                                           @RequestParam Long total_moras, @RequestParam Long total_monto_consumos, @RequestParam Long monto_a_pagar, @RequestParam Boolean pagado) {
+                                                           @RequestParam Double total_moras, @RequestParam Double total_monto_consumos, @RequestParam Double monto_a_pagar, @RequestParam Boolean pagado) {
 
         long creditoId=1;
         long moraId=1;

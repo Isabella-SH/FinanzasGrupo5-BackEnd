@@ -18,7 +18,7 @@ public class Credito1Request {
     private String TEoN;
     private String TEP;
     private String TNP;
-    private Long tasa;
+    private Double tasa;
     private String perio_capitalizacion;
 
     //private Client client;

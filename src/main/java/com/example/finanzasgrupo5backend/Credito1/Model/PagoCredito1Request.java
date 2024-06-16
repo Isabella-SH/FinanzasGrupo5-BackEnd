@@ -10,11 +10,9 @@ import lombok.NoArgsConstructor;
 public class PagoCredito1Request {
 
 
-    private Long total_moras;
-    private Long total_monto_consumos;
-    private Long monto_a_pagar;
-    private Boolean pagado;
+    private Double total_moras;
+    private Double total_monto_consumos;
+    private Double monto_a_pagar;
 
-    //private Credito1 credito1;
-    //private MoraCredito1 moraCredito1;
+
 }

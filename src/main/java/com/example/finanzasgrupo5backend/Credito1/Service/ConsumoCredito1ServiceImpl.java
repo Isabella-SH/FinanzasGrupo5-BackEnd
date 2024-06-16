@@ -116,23 +116,26 @@ public class ConsumoCredito1ServiceImpl implements IConsumoCredito1Service{
             //obtener datos
         LocalDate fechaI= newConsumo.getFechaInicial();
         LocalDate fechaF=newConsumo.getFechaFinal();
-        long precio= newConsumo.getPrecio();
+        Double precio= newConsumo.getPrecio();
 
-        long tasa= newConsumo.getCredito1().getTasa();
+        Double tasa= newConsumo.getCredito1().getTasa();
         String tep= newConsumo.getCredito1().getTEP();
         String tnp= newConsumo.getCredito1().getTNP();
         String periodoCapi= newConsumo.getCredito1().getPerio_capitalizacion();
 
            //setear datos
-        long interesConsumo= TasaEfectivaPeriodo.interes(tasa,precio);
-        newConsumo.setInteres(interesConsumo);
+        System.out.println(TasaEfectivaPeriodo.interes(tasa,precio));
+        Double interesConsumo= TasaEfectivaPeriodo.interes(tasa,precio);
 
-        if(newConsumo.getCredito1().getTEoN() == "E"){
-            long montoConsumo= TasaEfectivaPeriodo.montoPagarConsumo(fechaI,fechaF, tep,tasa,precio);
+        newConsumo.setInteres(interesConsumo);
+        System.out.println(newConsumo.getCredito1().getTEoN());
+        if(newConsumo.getCredito1().getTEoN().equals("E")){
+            System.out.println("EFECTIVO");
+            Double montoConsumo= TasaEfectivaPeriodo.montoPagarConsumo(fechaI,fechaF, tep,tasa,precio);
             newConsumo.setMontoConsumo(montoConsumo);
         }
-        else if (newConsumo.getCredito1().getTEoN() == "N") {
-            long montoConsumo= TasaNominalPeriodo.montoPagarConsumo(fechaI,fechaF, tnp,tasa,precio,periodoCapi);
+        else if (newConsumo.getCredito1().getTEoN().equals("N")) {
+            Double montoConsumo= TasaNominalPeriodo.montoPagarConsumo(fechaI,fechaF, tnp,tasa,precio,periodoCapi);
             newConsumo.setMontoConsumo(montoConsumo);
         }
 
@@ -164,7 +167,12 @@ public class ConsumoCredito1ServiceImpl implements IConsumoCredito1Service{
     }
 
     @Override
-    public Long sumTotalConsumoByCreditoId(Long creditoId) {
+    public Double sumTotalConsumoByCreditoId(Long creditoId) {
         return consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
+    }
+
+    @Override
+    public List<String[]> listConsumosByCredito(Long creditoId) {
+        return consumoCredito1Repository.listConsumosByCredito(creditoId);
     }
 }

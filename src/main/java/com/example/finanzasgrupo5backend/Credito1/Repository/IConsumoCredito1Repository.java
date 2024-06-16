@@ -24,9 +24,16 @@ public interface IConsumoCredito1Repository extends JpaRepository<ConsumoCredito
     List<ConsumoCredito1> findByFechaInicial(LocalDate fechaFinal);
 
     @Query(value = "SELECT sum(monto_consumo) FROM consumo_credito1 as cc" +
-            "            join creditos1 as cd on cd.id = cc.id_creditos1" +
+            "            join creditos1 as cd on cd.id = cc.creditos1" +
             "            join client as cl on cl.id = cd.client" +
-            "            where cc.id_creditos1 = :id" +
-            "            group by cc.id_creditos1", nativeQuery = true)
-    Long sumTotalConsumoByCreditoId(@Param("id") Long creditoId);
+            "            where cc.creditos1 = :id" +
+            "            group by cc.creditos1", nativeQuery = true)
+    Double sumTotalConsumoByCreditoId(@Param("id") Long creditoId);
+
+    //lista de consumos por credito
+    @Query(value = "SELECT cons.id, cons.producto, cons.precio, cons.fecha_inicial, cons.fecha_final, cons.interes, cons.monto_consumo, cons.creditos1 " +
+            "FROM consumo_credito1 cons " +
+            "JOIN creditos1 cd ON cd.id = cons.creditos1 " +
+            "WHERE cons.creditos1 = :id", nativeQuery = true)
+    List<String[]> listConsumosByCredito(@Param("id") Long creditoId);
 }

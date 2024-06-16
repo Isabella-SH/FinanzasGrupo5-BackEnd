@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 public class MoraCredito1Request {
 
     private String TEPm;
-    private Long tasa;
+    private Double tasa;
     private Long dias_atraso;
-    private Long total_moras;
+
 
     //private Credito1 credito1;
 }

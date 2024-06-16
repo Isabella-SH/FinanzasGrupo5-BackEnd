@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlAnyAttribute;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "moraCredito1")
+@Table(name = "pagoCredito1")
 public class PagoCredito1 {
 
     @Id
@@ -22,16 +22,13 @@ public class PagoCredito1 {
     private Long id;
 
     @Column(name = "total_moras", nullable = false)
-    private Long total_moras;
+    private Double total_moras;
 
     @Column(name = "total_monto_consumos", nullable = false)
-    private Long total_monto_consumos;
+    private Double total_monto_consumos;
 
     @Column(name = "monto_a_pagar", nullable = false)
-    private Long monto_a_pagar;
-
-    @Column(name = "pagado", nullable = true)
-    private Boolean pagado;
+    private Double monto_a_pagar;
 
     @ManyToOne
     @JoinColumn(name = "credito1_id", nullable = false)

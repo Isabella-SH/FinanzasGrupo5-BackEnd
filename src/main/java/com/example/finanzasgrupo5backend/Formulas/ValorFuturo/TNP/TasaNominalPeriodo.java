@@ -67,7 +67,7 @@ public class TasaNominalPeriodo {
         return ChronoUnit.DAYS.between(fechaI, fechaF);
     }
 
-    public static long montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String ten, long tasa, long precio, String periodoCapitalizacion) {
+    public static Double montoPagarConsumo(LocalDate fechaI, LocalDate fechaF, String ten, Double tasa, Double precio, String periodoCapitalizacion) {
 
         //         TEP                  c.?              t=
         //          ? en P=m                     ? en t =n
@@ -76,30 +76,30 @@ public class TasaNominalPeriodo {
         long diasP = numeroDiasPeriodo(ten);
         long diasPC = numeroDiasPeriodoCapitalizacion(periodoCapitalizacion);
 
-        long interesPorcentaje = tasa / 100;
+        Double interesPorcentaje = tasa / 100;
         long t = tiempo(fechaI, fechaF);
         long m = diasP / diasPC;
         long n = t / diasPC;
-        long interes = interesPorcentaje / m;
+        Double interes = interesPorcentaje / m;
 
-        long s = (long) (precio * Math.pow((1 + interes), n));
+        Double s = (Double) (precio * Math.pow((1 + interes), n));
 
         return s;
     }
 
-    public static long calcularInteresMoratorio(String tep, long tasa, long valorNominal, long diasAtraso) {
+    public static Double calcularInteresMoratorio(String tep, Double tasa, Double valorNominal, long diasAtraso) {
 
         //Im= valor nominal [(1+tep)^(diastrasladar/diastep)  -1]
 
         long ndp = numeroDiasPeriodo(tep);
-        long interes = tasa / 100;
+        Double interes = tasa / 100;
 
-        long interesMoratorio = (long) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp)) - 1));
+        Double interesMoratorio = (Double) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp)) - 1));
 
         return interesMoratorio;
     }
 
-    public static long interes(long tasa, long precio){
+    public static Double interes(Double tasa, Double precio){
         return precio * (tasa/100);
     }
 }

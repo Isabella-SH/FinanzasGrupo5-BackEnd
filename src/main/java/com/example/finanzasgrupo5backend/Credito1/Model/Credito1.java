@@ -1,6 +1,6 @@
 package com.example.finanzasgrupo5backend.Credito1.Model;
 
-import com.example.finanzasgrupo5backend.Clients.Model.Client;
+import com.example.finanzasgrupo5backend.Profile.Clients.Model.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +38,7 @@ public class Credito1 {
     private String TNP; //mensual, trimestral . ...
 
     @Column(name = "tasa", nullable = false)
-    private Long tasa;
+    private Double tasa;
 
     @Column(name = "perio_capitalizacion")
     private String perio_capitalizacion; //quincenal , diaria ,....

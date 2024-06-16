@@ -5,15 +5,12 @@ import com.example.finanzasgrupo5backend.Users.Model.UsersResponse;
 import com.example.finanzasgrupo5backend.Users.Service.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-
+    @Autowired
     private IUserService uS;
 
     @PostMapping("/users")
@@ -23,5 +20,9 @@ public class UserController {
         uS.insertUser(u);
     }
 
+    @PostMapping("/insert_role")
+    public void insertarRol(@RequestParam("authority") String authority, @RequestParam("user_id") Long user_id){
+        uS.insRol(authority,user_id);
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.example.finanzasgrupo5backend.Credito1.Service;
 
 
-import com.example.finanzasgrupo5backend.Clients.Repository.IClientRepository;
+import com.example.finanzasgrupo5backend.Profile.Clients.Repository.IClientRepository;
 import com.example.finanzasgrupo5backend.Credito1.Model.Credito1;
 import com.example.finanzasgrupo5backend.Credito1.Model.Credito1Request;
 import com.example.finanzasgrupo5backend.Credito1.Model.Credito1Response;
@@ -102,7 +102,7 @@ public class Credito1ServiceImpl implements ICredito1Service {
 
     @Override
     public Credito1Response updateCredito1(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEoN,String TEP, String TNP,
-                                            Long tasa, String perio_capitalizacion, Long clienteId) {
+                                           Double tasa, String perio_capitalizacion, Long clienteId) {
 
         // Buscar el producto
         var credito1 = credito1Repository.findById(id)

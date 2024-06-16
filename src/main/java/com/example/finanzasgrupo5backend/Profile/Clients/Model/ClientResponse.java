@@ -1,6 +1,7 @@
-package com.example.finanzasgrupo5backend.Clients.Model;
+package com.example.finanzasgrupo5backend.Profile.Clients.Model;
 
 import com.example.finanzasgrupo5backend.Credito1.Model.Credito1;
+import com.example.finanzasgrupo5backend.Profile.Store.Model.Store;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class ClientResponse {
     private Long dni;
     private String email;
     private Long credit_limit;
-    List<Credito1> credito1s;
+
+
 }

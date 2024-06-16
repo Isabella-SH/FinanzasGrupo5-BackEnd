@@ -2,7 +2,7 @@
 
 package com.example.finanzasgrupo5backend.Users.Entity;
 
-import com.example.finanzasgrupo5backend.Role.Entity.Role;
+import com.example.finanzasgrupo5backend.Role.Model.Role;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,7 +30,6 @@ public class Users implements Serializable {
 	private String username;
 	@Column(length = 200)
 	private String password;
-	private Boolean enabled;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private List<Role> roles;
@@ -59,13 +58,6 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public List<Role> getRoles() {
 		return roles;

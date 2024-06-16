@@ -15,7 +15,7 @@ public interface IPagoCredito1Service {
 
     PagoCredito1Response createPagoCredito1(Long creditoId);
 
-    public abstract PagoCredito1Response updatePagoCredito1(Long id, Long total_moras, Long total_monto_consumos, Long monto_a_pagar, Boolean pagado, Long credito1, Long moracredito1);
+    public abstract PagoCredito1Response updatePagoCredito1(Long id, Double total_moras, Double total_monto_consumos, Double monto_a_pagar, Boolean pagado, Long credito1, Long moracredito1);
 
     public abstract PagoCredito1Response deletePagoCredito1(Long id);
 

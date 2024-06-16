@@ -1,6 +1,6 @@
 package com.example.finanzasgrupo5backend.Products.Model;
 
-import com.example.finanzasgrupo5backend.Profile.Model.Store;
+import com.example.finanzasgrupo5backend.Profile.Store.Model.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

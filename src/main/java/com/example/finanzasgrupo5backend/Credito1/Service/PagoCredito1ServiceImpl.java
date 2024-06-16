@@ -89,20 +89,20 @@ public class PagoCredito1ServiceImpl implements IPagoCredito1Service{
         newPago.setCredito1(existingCredito1); //asocia el consumo a un credito1
 
         // obtener datos
-        Long total_moras = 0L;
-        Boolean pagado = true;
+        Double total_moras = 0D;
+
         if (!existingMoraCredito1.isEmpty())
         {
-            total_moras = existingMoraCredito1.stream().mapToLong(Mora -> Mora.getTotal_moras()).sum();
+            total_moras = 2D;
         }
 
         newPago.setTotal_moras(total_moras);
 
 
-        Long total_monto_consumos = consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
+        Double total_monto_consumos = consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId);
         newPago.setTotal_monto_consumos(total_monto_consumos);
 
-        Long monto_pagar = (Long) (total_moras + total_monto_consumos);
+        Double monto_pagar = (Double) (total_moras + total_monto_consumos);
         newPago.setMonto_a_pagar(monto_pagar);
         newPago.setCredito1(existingCredito1);
 
@@ -115,12 +115,11 @@ public class PagoCredito1ServiceImpl implements IPagoCredito1Service{
 
 
     @Override
-    public PagoCredito1Response updatePagoCredito1(Long id, Long total_moras, Long total_monto_consumos, Long monto_a_pagar, Boolean pagado, Long credito1, Long moracredito1) {
+    public PagoCredito1Response updatePagoCredito1(Long id, Double total_moras, Double total_monto_consumos, Double monto_a_pagar, Boolean pagado, Long credito1, Long moracredito1) {
         // Buscar el pago
         var pago = pagoCredito1Repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un pago con el id: " + id));
 
-        pago.setPagado(pagado);
         pago.setTotal_monto_consumos(total_monto_consumos);
         pago.setTotal_moras(total_moras);
         pago.setMonto_a_pagar(monto_a_pagar);
