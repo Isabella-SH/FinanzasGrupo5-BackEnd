@@ -6,8 +6,6 @@ import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository
 import com.example.finanzasgrupo5backend.Credito1.Repository.IMoraCredito1Repository;
 import com.example.finanzasgrupo5backend.Credito1.Repository.IPagoCredito1Repository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
-import com.example.finanzasgrupo5backend.Validations.MoraCreditos1Validation;
-import com.example.finanzasgrupo5backend.Validations.PagoCredito1Validation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

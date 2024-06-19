@@ -7,11 +7,8 @@ import com.example.finanzasgrupo5backend.Credito1.Repository.IConsumoCredito1Rep
 import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository;
 import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TEP.TasaEfectivaPeriodo;
 import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TNP.TasaNominalPeriodo;
-import com.example.finanzasgrupo5backend.Products.Model.Product;
-import com.example.finanzasgrupo5backend.Products.Model.ProductResponse;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
-import com.example.finanzasgrupo5backend.Validations.ConsumoCredito1Validation;
-import com.example.finanzasgrupo5backend.Validations.ProductValidation;
+import com.example.finanzasgrupo5backend.Validations.Credito1.ConsumoCredito1Validation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
