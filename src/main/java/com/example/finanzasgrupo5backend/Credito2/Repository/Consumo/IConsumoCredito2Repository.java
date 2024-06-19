@@ -1,2 +1,7 @@
-package com.example.finanzasgrupo5backend.Credito2.Repository.Consumo;public interface IConsumoCredito2Repository {
+package com.example.finanzasgrupo5backend.Credito2.Repository.Consumo;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IConsumoCredito2Repository {
 }
