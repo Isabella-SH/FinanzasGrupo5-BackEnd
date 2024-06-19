@@ -1,7 +1,6 @@
-package com.example.finanzasgrupo5backend.Validations;
+package com.example.finanzasgrupo5backend.Validations.Credito1;
 
 import com.example.finanzasgrupo5backend.Credito1.Model.ConsumoCredito1Request;
-import com.example.finanzasgrupo5backend.Credito1.Model.Credito1Request;
 import com.example.finanzasgrupo5backend.Shared.exception.ValidationException;
 
 public class ConsumoCredito1Validation {

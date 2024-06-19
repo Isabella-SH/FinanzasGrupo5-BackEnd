@@ -7,12 +7,11 @@ import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository
 import com.example.finanzasgrupo5backend.Credito1.Repository.IMoraCredito1Repository;
 import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TEP.TasaEfectivaPeriodo;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
-import com.example.finanzasgrupo5backend.Validations.MoraCreditos1Validation;
+import com.example.finanzasgrupo5backend.Validations.Credito1.MoraCreditos1Validation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

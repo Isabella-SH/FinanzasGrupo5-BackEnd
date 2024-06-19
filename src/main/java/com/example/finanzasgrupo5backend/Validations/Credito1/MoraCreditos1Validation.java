@@ -1,4 +1,4 @@
-package com.example.finanzasgrupo5backend.Validations;
+package com.example.finanzasgrupo5backend.Validations.Credito1;
 
 import com.example.finanzasgrupo5backend.Credito1.Model.MoraCredito1Request;
 

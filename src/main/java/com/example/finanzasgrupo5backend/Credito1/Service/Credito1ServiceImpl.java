@@ -7,7 +7,7 @@ import com.example.finanzasgrupo5backend.Credito1.Model.Credito1Request;
 import com.example.finanzasgrupo5backend.Credito1.Model.Credito1Response;
 import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
-import com.example.finanzasgrupo5backend.Validations.Credito1Validation;
+import com.example.finanzasgrupo5backend.Validations.Credito1.Credito1Validation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,11 +31,6 @@ public class Credito1ServiceImpl implements ICredito1Service {
         this.clientRepository=clientRepository;
     }
 
-
-    @Override
-    public List<Credito1Response> getAllProducts() {
-        return List.of();
-    }
 
     @Override
     public List<Credito1Response> getAllCredito1() {
@@ -72,10 +67,7 @@ public class Credito1ServiceImpl implements ICredito1Service {
         return toShowCreditos1;
     }
 
-    @Override
-    public Credito1Response createCredito1(Credito1Response credito1, Long clienteId) {
-        return null;
-    }
+
 
 
     //POST
