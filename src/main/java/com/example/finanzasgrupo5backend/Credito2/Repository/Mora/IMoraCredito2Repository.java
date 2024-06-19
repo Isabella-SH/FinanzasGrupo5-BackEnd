@@ -11,6 +11,6 @@ public interface IMoraCredito2Repository extends JpaRepository<MoraCredito2,Long
 
     List<MoraCredito2> findMoraByCredito2Id(Long idCredito2);
     List<MoraCredito2> findAll();
-
     List<MoraCredito2> findById(long id);
+    MoraCredito2 findNumeroCuota(double numero_cuota);
 }
