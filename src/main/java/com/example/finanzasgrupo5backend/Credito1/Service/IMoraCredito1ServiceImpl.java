@@ -5,6 +5,7 @@ import com.example.finanzasgrupo5backend.Credito1.Model.*;
 import com.example.finanzasgrupo5backend.Credito1.Repository.IConsumoCredito1Repository;
 import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository;
 import com.example.finanzasgrupo5backend.Credito1.Repository.IMoraCredito1Repository;
+import com.example.finanzasgrupo5backend.Formulas.Anualidades.SimpleVencida.AnualidadSimpleVencida;
 import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TEP.TasaEfectivaPeriodo;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
 import com.example.finanzasgrupo5backend.Validations.Credito1.MoraCreditos1Validation;
@@ -94,8 +95,6 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
 
         newMora.setTotal_moras(totalMoras);
 
-
-
         var createMora = moraCredito1Repository.save(newMora);
         var response = modelMapper.map(createMora, MoraCredito1Response.class);
 
@@ -114,6 +113,17 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
         mora.setTEPm(TEPm);
         mora.setDias_atraso(dias_atraso);
         mora.setTasa(tasa);
+
+
+        //usar formulas
+        Double interes_compensatorio = AnualidadSimpleVencida.calcularInteresCompensatorio(TEPm, tasa
+                , consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1), (double) dias_atraso);
+        Double interes_moratorio = AnualidadSimpleVencida.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1),  (double) dias_atraso);
+
+
+        //setear datos
+        double totalMoras= interes_compensatorio+interes_moratorio;
+        mora.setTotal_moras(totalMoras);
 
 
         // Guardar el moracredito1  actualizado
