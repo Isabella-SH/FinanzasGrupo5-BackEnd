@@ -117,8 +117,8 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
 
         //usar formulas
         Double interes_compensatorio = AnualidadSimpleVencida.calcularInteresCompensatorio(TEPm, tasa
-                , consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1), dias_atraso);
-        Double interes_moratorio = AnualidadSimpleVencida.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1), dias_atraso);
+                , consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1), (double) dias_atraso);
+        Double interes_moratorio = AnualidadSimpleVencida.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1),  (double) dias_atraso);
 
 
         //setear datos
