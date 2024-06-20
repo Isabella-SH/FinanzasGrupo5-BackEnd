@@ -163,4 +163,9 @@ public class MoraCredito2ServiceImpl implements IMoraCredito2Service {
 
         return response;
     }
+
+    @Override
+    public Double sumTotalMoraByCreditoIdAndCuota(Long credito2, Long cuota){
+        return moraCredito2Repository.sumTotalMoraByCreditoIdAndCuota(credito2, cuota);
+    }
 }

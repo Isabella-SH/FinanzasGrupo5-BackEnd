@@ -52,11 +52,11 @@ public class Credito2Controller {
     @Operation(summary = "Update a credito 2")
     @PatchMapping("/credito2/clienteId/{id}")
     public ResponseEntity<Credito2Response> updateCredito2(@PathVariable(name = "id") Long creditoId,
-                                                           @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal, @RequestParam String TEoN, @RequestParam String TEP, @RequestParam String TNP,
+                                                           @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal,  @RequestParam String TEP,
                                                            @RequestParam Double tasa, @RequestParam Double renta, @RequestParam Long cuotas, @RequestParam Long dias_plazo_gracia) {
 
         long clienteId=1;
-        var res = credito2Service.updateCredito2(creditoId, fechaInicial, fechaFinal, TEoN,TEP, TNP,
+        var res = credito2Service.updateCredito2(creditoId, fechaInicial, fechaFinal, TEP,
                 tasa, renta, cuotas, dias_plazo_gracia, Long.valueOf(clienteId));
         if (res == null) {
             return ResponseEntity.notFound().build();

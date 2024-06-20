@@ -34,7 +34,7 @@ public class MoraCredito2Controller {
     }
 
     @Operation(summary = "Obtain a list of all moras credito 2")
-    @GetMapping("/mora-credito1")
+    @GetMapping("/mora-credito2")
     public ResponseEntity<List<MoraCredito2Response>> getAllMoraCreditos2() {
         var res = moraCredito2Service.getAllMoraCredito2();
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class MoraCredito2Controller {
     }
 
     @Operation(summary = "Delete a mora credito1")
-    @DeleteMapping("/mora-credito1/{id}")
+    @DeleteMapping("/mora-credito2/{id}")
     public ResponseEntity<Void> deleteMoraCredito2(@PathVariable(name = "id") Long credito2Id) {
         moraCredito2Service.deleteMoraCredito2(credito2Id);
         return ResponseEntity.noContent().build();

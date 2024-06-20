@@ -6,6 +6,10 @@ import com.example.finanzasgrupo5backend.Credito2.Model.Credito.Credito2;
 import com.example.finanzasgrupo5backend.Credito2.Model.Credito.Credito2Request;
 import com.example.finanzasgrupo5backend.Credito2.Model.Credito.Credito2Response;
 import com.example.finanzasgrupo5backend.Credito2.Repository.ICredito2Repository;
+import com.example.finanzasgrupo5backend.Credito2.Repository.Mora.IMoraCredito2Repository;
+import com.example.finanzasgrupo5backend.Credito2.Repository.Pago.IPagoCredito2Repository;
+import com.example.finanzasgrupo5backend.Credito2.Service.Pago.IPagoCredito2Service;
+import com.example.finanzasgrupo5backend.Formulas.Anualidades.SimpleVencida.AnualidadSimpleVencida;
 import com.example.finanzasgrupo5backend.Profile.Clients.Repository.IClientRepository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
 import com.example.finanzasgrupo5backend.Validations.Credito2.Credito2Validation;
@@ -23,11 +27,16 @@ public class Credito2ServiceImpl implements ICredito2Service {
     private final ICredito2Repository credito2Repository;
     private final IClientRepository clientRepository;
     private final ModelMapper modelMapper;
+    private final IPagoCredito2Service pagoCredito2Service;
+    private final IMoraCredito2Repository moraCredito2Repository;
 
-    public Credito2ServiceImpl(ICredito2Repository credito2Repository, IClientRepository clientRepository, ModelMapper modelMapper) {
+    public Credito2ServiceImpl(ICredito2Repository credito2Repository, IClientRepository clientRepository, ModelMapper modelMapper
+            , IPagoCredito2Service pagoCredito2Service, IMoraCredito2Repository moraCredito2Repository ) {
         this.credito2Repository = credito2Repository;
         this.clientRepository = clientRepository;
         this.modelMapper = modelMapper;
+        this.pagoCredito2Service = pagoCredito2Service;
+        this.moraCredito2Repository = moraCredito2Repository;
     }
 
     @Override
@@ -78,25 +87,30 @@ public class Credito2ServiceImpl implements ICredito2Service {
         // Mapeo
         var newCredito2 = modelMapper.map(credito2Request, Credito2.class);
 
+        newCredito2.setRenta(AnualidadSimpleVencida.calcularRentaConPeridoDeGracia(credito2Request.getCredito_limit(), credito2Request.getTasa(), credito2Request.getTEP(), credito2Request.getFechaInicial(), credito2Request.getFechaFinal(), credito2Request.getCuotas(), credito2Request.getDias_plazo_gracias()));
         newCredito2.setClient(existingcliente); //asocia el credito a un cliente
 
         var createCredito2 = credito2Repository.save(newCredito2);
+
         var response = modelMapper.map(createCredito2, Credito2Response .class);
+
+        for (int i = 1; i <= credito2Request.getCuotas(); i++) {
+            pagoCredito2Service.createPagoCredito2(createCredito2.getRenta(), moraCredito2Repository.sumTotalMoraByCreditoIdAndCuota(createCredito2.getId(), (long) i),
+                    (long) i, "PENDIENTE", createCredito2.getId());
+        }
 
         return response;
     }
 
     @Override
-    public Credito2Response updateCredito2(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEoN, String TEP, String TNP, Double tasa, Double renta, Long cuotas, Long dias_plazo_gracia, Long clienteId) {
+    public Credito2Response updateCredito2(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEP, Double tasa, Double renta, Long cuotas, Long dias_plazo_gracia, Long clienteId) {
 
         // Buscar el credito
         var credito2 = credito2Repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un credito2 con el id: " + id));
 
 
-        credito2.setTEoN(TEoN);
         credito2.setTEP(TEP);
-        credito2.setTNP(TNP);
         credito2.setTasa(tasa);
         credito2.setFechaFinal(fechaFinal);
         credito2.setFechaInicial(fechaInicial);

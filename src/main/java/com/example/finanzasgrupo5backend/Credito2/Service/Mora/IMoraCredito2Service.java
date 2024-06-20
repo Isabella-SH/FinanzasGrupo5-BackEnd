@@ -2,6 +2,7 @@ package com.example.finanzasgrupo5backend.Credito2.Service.Mora;
 
 import com.example.finanzasgrupo5backend.Credito2.Model.Mora.MoraCredito2Request;
 import com.example.finanzasgrupo5backend.Credito2.Model.Mora.MoraCredito2Response;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -16,5 +17,8 @@ public interface IMoraCredito2Service {
     public abstract MoraCredito2Response updateMoraCredito2(Long id, String TEPm, Double tasa, Double dias_atraso);
 
     public abstract MoraCredito2Response deleteMoraCredito2(Long id);
+
+
+    public abstract Double sumTotalMoraByCreditoIdAndCuota(Long credito2, Long cuota);
 
 }

@@ -28,14 +28,11 @@ public class Credito2 {
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;
 
-    @Column(name = "TEoN",nullable = false)
-    private String TEoN;  //E -> EFECTIVA  N->NOMIMAL
+    @Column(name="credito_limit", nullable = false)
+    private Double credito_limit;
 
     @Column(name = "TEP")
     private String TEP; //mensual, trimestral ...
-
-    @Column(name = "TNP")
-    private String TNP; //mensual, trimestral . ...
 
     @Column(name = "tasa", nullable = false)
     private Double tasa;
