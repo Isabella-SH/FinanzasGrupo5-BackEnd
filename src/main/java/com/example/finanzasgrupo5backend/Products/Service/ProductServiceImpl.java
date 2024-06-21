@@ -89,7 +89,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ProductResponse updateProduct(Long id, String name, Long price, Long storeId) {
+    public ProductResponse updateProduct(Long id, String name, Double price, Long storeId) {
 
         // Buscar el producto
         var product = productRepository.findById(id)

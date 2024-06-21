@@ -1,11 +1,19 @@
 package com.example.finanzasgrupo5backend.Credito2.Model.Consumo;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConsumoCredito2Response {
-    private String producto;
+    private Long id;
+    private String productos;
     private Double precio;
-    private LocalDate fechaInicial;
-    private LocalDate fechaFinal;
+    private String fechaInicial;
+    private String fechaFinal;
     private Long cuotas;
+    private Long creditos2;
 }

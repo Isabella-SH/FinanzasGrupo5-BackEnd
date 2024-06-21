@@ -1,5 +1,12 @@
 package com.example.finanzasgrupo5backend.Credito2.Model.Pago;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PagoCredito2Response {
     private Long id;
     private Double renta;

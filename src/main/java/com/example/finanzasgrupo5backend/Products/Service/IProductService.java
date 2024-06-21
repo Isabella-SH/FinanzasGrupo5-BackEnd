@@ -14,7 +14,7 @@ public interface IProductService {
 
     public abstract ProductResponse createProduct(ProductRequest product, Long storeId);
 
-    public abstract ProductResponse updateProduct(Long id, String name, Long price, Long storeId);
+    public abstract ProductResponse updateProduct(Long id, String name, Double price, Long storeId);
 
     public abstract ProductResponse deleteProduct(Long id);
 }

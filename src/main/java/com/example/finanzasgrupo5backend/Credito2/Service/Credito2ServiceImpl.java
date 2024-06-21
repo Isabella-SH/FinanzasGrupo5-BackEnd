@@ -87,7 +87,13 @@ public class Credito2ServiceImpl implements ICredito2Service {
         // Mapeo
         var newCredito2 = modelMapper.map(credito2Request, Credito2.class);
 
-        newCredito2.setRenta(AnualidadSimpleVencida.calcularRentaConPeridoDeGracia(credito2Request.getCredito_limit(), credito2Request.getTasa(), credito2Request.getTEP(), credito2Request.getFechaInicial(), credito2Request.getFechaFinal(), credito2Request.getCuotas(), credito2Request.getDias_plazo_gracias()));
+
+        newCredito2.setRenta(AnualidadSimpleVencida.calcularRentaConPeridoDeGracia(
+                credito2Request.getCredito_limit(),
+                credito2Request.getTasa(), credito2Request.getTEP(),
+                credito2Request.getFechaInicial(), credito2Request.getFechaFinal(),
+                credito2Request.getCuotas(), credito2Request.getDias_plazo_gracias()));
+
         newCredito2.setClient(existingcliente); //asocia el credito a un cliente
 
         var createCredito2 = credito2Repository.save(newCredito2);
@@ -95,7 +101,7 @@ public class Credito2ServiceImpl implements ICredito2Service {
         var response = modelMapper.map(createCredito2, Credito2Response .class);
 
         for (int i = 1; i <= credito2Request.getCuotas(); i++) {
-            pagoCredito2Service.createPagoCredito2(createCredito2.getRenta(), moraCredito2Repository.sumTotalMoraByCreditoIdAndCuota(createCredito2.getId(), (long) i),
+            pagoCredito2Service.createPagoCredito2(createCredito2.getRenta(), 0D,
                     (long) i, "PENDIENTE", createCredito2.getId());
         }
 

@@ -15,6 +15,7 @@ public class Credito1Request {
 
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
+    private Double monto;
     private String TEoN;
     private String TEP;
     private String TNP;

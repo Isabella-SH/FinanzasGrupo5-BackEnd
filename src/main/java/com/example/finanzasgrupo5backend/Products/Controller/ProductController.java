@@ -49,7 +49,7 @@ public class ProductController {
 
     @Operation(summary = "Update a product")
     @PatchMapping("/products/{id}")
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable(name = "id") Long productId, @RequestParam String name, @RequestParam Long price) {
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable(name = "id") Long productId, @RequestParam String name, @RequestParam Double price) {
         long storeId=1;
         var res = productService.updateProduct(productId, name, price, Long.valueOf(storeId));
         if (res == null) {

@@ -31,9 +31,11 @@ public interface IConsumoCredito1Repository extends JpaRepository<ConsumoCredito
     Double sumTotalConsumoByCreditoId(@Param("id") Long creditoId);
 
     //lista de consumos por credito
-    @Query(value = "SELECT cons.id, cons.producto, cons.precio, cons.fecha_inicial, cons.fecha_final, cons.interes, cons.monto_consumo, cons.creditos1 " +
+    @Query(value = "SELECT cons.id, pd.name, pd.price, cons.fecha_inicial, " +
+            "cons.interes, cons.monto_consumo, cons.creditos1" +
             "FROM consumo_credito1 cons " +
             "JOIN creditos1 cd ON cd.id = cons.creditos1 " +
+            "join products pd on pd.id = cons.productos" +
             "WHERE cons.creditos1 = :id", nativeQuery = true)
     List<String[]> listConsumosByCredito(@Param("id") Long creditoId);
 }

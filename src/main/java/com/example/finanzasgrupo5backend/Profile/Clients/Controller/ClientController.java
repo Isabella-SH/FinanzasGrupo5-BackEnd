@@ -37,10 +37,9 @@ public class ClientController {
     @Operation(summary = "Update Client's Credit Limit")
     @PatchMapping("/clients")
     public ResponseEntity<ClientResponse> actualizar(
-            @RequestParam(name = "clientId") Long id,
-            @RequestParam(name = "credit_limit") Long credit_limit){
+            @RequestParam(name = "clientId") Long id){
 
-        clientService.updateClient(id,credit_limit);
+        clientService.updateClient(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -11,6 +11,7 @@ import java.util.List;
 public interface IPagoCredito1Repository extends JpaRepository<PagoCredito1,Long> {
 
     List<PagoCredito1> findPagoByCredito1Id(Long creditoId);
+
     List<PagoCredito1> findAll();
 
     List<PagoCredito1> findById(long id);

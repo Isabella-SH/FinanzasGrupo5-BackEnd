@@ -1,5 +1,6 @@
 package com.example.finanzasgrupo5backend.Credito1.Model;
 
+import com.example.finanzasgrupo5backend.Products.Model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +21,9 @@ public class ConsumoCredito1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "producto", nullable = false)
-    private String producto;
-
-    @Column(name = "precio", nullable = false)
-    private Double precio;
+    @ManyToOne
+    @JoinColumn(name = "productos", nullable = false)
+    private Product productos;
 
     @Column(name = "fechaInicial",nullable = false)
     private LocalDate fechaInicial;

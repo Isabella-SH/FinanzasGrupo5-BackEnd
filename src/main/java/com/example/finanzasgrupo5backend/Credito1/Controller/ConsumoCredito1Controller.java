@@ -2,6 +2,7 @@ package com.example.finanzasgrupo5backend.Credito1.Controller;
 
 import com.example.finanzasgrupo5backend.Credito1.Model.ConsumoCredito1Request;
 import com.example.finanzasgrupo5backend.Credito1.Model.ConsumoCredito1Response;
+import com.example.finanzasgrupo5backend.Credito1.Model.ConsumoCredito1ResponseHTTP;
 import com.example.finanzasgrupo5backend.Credito1.Service.IConsumoCredito1Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,16 +27,18 @@ public class ConsumoCredito1Controller {
 
     @Operation(summary = "Create a Consumo Credito1")
     @PostMapping("/consumos-credito1")
-    public ResponseEntity<ConsumoCredito1Response> createConsumoCredito1
-            (@RequestParam(name = "credito1Id") Long creditoId, @RequestBody ConsumoCredito1Request consumoCredito1Request) {
+    public ResponseEntity<ConsumoCredito1ResponseHTTP> createConsumoCredito1
+            (@RequestParam(name = "credito1Id") Long creditoId,
+             @RequestParam(name = "productoId") Long productoId,
+             @RequestBody ConsumoCredito1Request consumoCredito1Request) {
 
-        var res = consumoCredito1Service.createConsumo(consumoCredito1Request, creditoId);
+        var res = consumoCredito1Service.createConsumo(consumoCredito1Request, creditoId, productoId);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Obtain a list of all consumos credito1")
     @GetMapping("/consumos-credito1")
-    public ResponseEntity<List<ConsumoCredito1Response>> getAllConsumosCredito1() {
+    public ResponseEntity<List<ConsumoCredito1ResponseHTTP>> getAllConsumosCredito1() {
         var res = consumoCredito1Service.getAllConsumosCredito1();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
@@ -60,12 +63,11 @@ public class ConsumoCredito1Controller {
             ConsumoCredito1Response dto =  new ConsumoCredito1Response();
             dto.setId(Long.parseLong(data[0]));
             dto.setProducto(data[1]);
-            dto.setPrecio(Double.parseDouble(data[2]));
+            dto.setPrice(Double.parseDouble(data[2]));
             dto.setFechaInicial(data[3]);
-            dto.setFechaFinal(data[4]);
-            dto.setInteres(Double.parseDouble(data[5]));
-            dto.setMontoConsumo(Double.parseDouble(data[6]));
-            dto.setCredito1(Long.parseLong(data[7]));
+            dto.setInteres(Double.parseDouble(data[4]));
+            dto.setMontoConsumo(Double.parseDouble(data[5]));
+            dto.setCredito1(Long.parseLong(data[6]));
             listadto.add(dto);
         }
         var res = listadto;

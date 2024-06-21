@@ -4,13 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConsumoCredito2Request {
+public class ConsumoCredito2ResponseHTTP {
+    private Long id;
 
-    private LocalDate fechaInicial;
+    private String fechaInicial;
 
+    private String fechaFinal;
+
+    private Long cuota;
 
 }

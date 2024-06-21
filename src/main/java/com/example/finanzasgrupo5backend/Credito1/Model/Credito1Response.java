@@ -18,6 +18,7 @@ public class Credito1Response {
     private LocalDate fechaFinal;
     private String TEoN;
     private String TEP;
+    private Double monto;
     private String TNP;
     private Double tasa;
     private String perio_capitalizacion;

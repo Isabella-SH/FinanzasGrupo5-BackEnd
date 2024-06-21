@@ -30,8 +30,6 @@ public class Client {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "credit_limit", nullable = false)
-    private Long credit_limit;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Credito1> credito1s;

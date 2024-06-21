@@ -21,7 +21,7 @@ public class MoraCreditos2Validation {
 
     public static void ValidateNumeroCuotaCorrecto(MoraCredito2Request moraCredito2Request, double numero_cuotas, long credito2Id, IMoraCredito2Repository moraCredito2Repository) {
 
-        if(moraCredito2Request.getNumero_cuota()>numero_cuotas || moraCredito2Request.getNumero_cuota()<numero_cuotas){
+        if(moraCredito2Request.getNumero_cuota()>numero_cuotas || moraCredito2Request.getNumero_cuota()<=0){
             throw new ValidationException("La cuota a la que pertenece la mora no es valida"); //error 400
         }
 

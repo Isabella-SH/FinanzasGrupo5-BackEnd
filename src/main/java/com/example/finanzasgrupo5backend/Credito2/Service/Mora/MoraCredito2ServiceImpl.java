@@ -109,6 +109,7 @@ public class MoraCredito2ServiceImpl implements IMoraCredito2Service {
         //setear datos
         double totalMoras= interes_compensatorio+interes_moratorio;
         newMora.setTotal_moras(totalMoras);
+        newMora.setNumero_cuota(moracredito2Request.getNumero_cuota());
 
         var createMora = moraCredito2Repository.save(newMora);
         var response = modelMapper.map(createMora, MoraCredito2Response.class);

@@ -14,6 +14,5 @@ public class ClientRequest {
         private String name;
         private Long dni;
         private String email;
-        private Long credit_limit;
 
 }

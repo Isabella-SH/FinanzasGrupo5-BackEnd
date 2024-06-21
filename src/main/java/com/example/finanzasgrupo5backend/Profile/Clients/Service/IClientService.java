@@ -9,6 +9,7 @@ public interface IClientService {
 
     public abstract void deleteClient(Long id_client);
 
-    public abstract ClientResponse updateClient(Long id, Long credit_limit);
+    //sin uso en la aplicación porque en si no debería actualizar usuarios
+    public abstract ClientResponse updateClient(Long id);
 
 }

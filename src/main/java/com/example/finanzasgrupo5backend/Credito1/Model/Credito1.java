@@ -27,6 +27,8 @@ public class Credito1 {
 
     @Column(name = "fechaFinal",nullable = false)
     private LocalDate fechaFinal;
+    @Column(name = "monto",nullable = false)
+    private Double monto;
 
     @Column(name = "TEoN",nullable = false)
     private String TEoN;  //E -> EFECTIVA  N->NOMIMAL

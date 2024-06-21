@@ -24,7 +24,7 @@ public class Product {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private Long price;
+    private Double price;
 
     //muchos productos pertenecen a un negocio
     @ManyToOne

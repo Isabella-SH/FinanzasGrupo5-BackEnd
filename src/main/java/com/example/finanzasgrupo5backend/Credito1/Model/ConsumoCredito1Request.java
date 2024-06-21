@@ -12,10 +12,8 @@ import java.time.LocalDate;
 
 public class ConsumoCredito1Request {
 
-    private String producto;
-    private Double precio;
+
     private LocalDate fechaInicial;
-    private LocalDate fechaFinal;
 
     //id del credito pedido en el controller
 }

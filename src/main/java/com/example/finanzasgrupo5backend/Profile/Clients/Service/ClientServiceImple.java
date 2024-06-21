@@ -57,12 +57,9 @@ public class ClientServiceImple implements IClientService{
     }
 
     @Override
-    public ClientResponse updateClient(Long id, Long credit_limit) {
+    public ClientResponse updateClient(Long id) {
         var existingClient = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el un cliente con ID: " + id));
-
-
-        existingClient.setCredit_limit(credit_limit);
 
         var updateClient = clientRepository.save(existingClient);
         var response = modelMapper.map(updateClient, ClientResponse.class);

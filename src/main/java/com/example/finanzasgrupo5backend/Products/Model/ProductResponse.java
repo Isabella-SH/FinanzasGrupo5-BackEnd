@@ -13,5 +13,5 @@ public class ProductResponse {
 
     private Long id;
     private String name;
-    private Long price;
+    private Double price;
 }

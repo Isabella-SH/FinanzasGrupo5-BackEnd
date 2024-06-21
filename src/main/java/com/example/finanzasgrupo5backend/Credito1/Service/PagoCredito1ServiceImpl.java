@@ -91,7 +91,7 @@ public class PagoCredito1ServiceImpl implements IPagoCredito1Service{
 
         if (!existingMoraCredito1.isEmpty())
         {
-            total_moras = 2D;
+            total_moras = existingMoraCredito1.stream().mapToDouble(MoraCredito1::getTotal_moras).sum();
         }
 
         newPago.setTotal_moras(total_moras);

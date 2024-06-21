@@ -68,8 +68,6 @@ public class Credito1ServiceImpl implements ICredito1Service {
     }
 
 
-
-
     //POST
     @Override
     public Credito1Response createCredito1(Credito1Request credito1Request, Long clienteId) {
