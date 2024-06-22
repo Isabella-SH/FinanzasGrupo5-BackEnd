@@ -20,7 +20,7 @@ public class Credito2Response {
     private Double tasa;
     private Long cuotas;
     private Double renta;
-    private Long dias_plazo_gracias;
+    private Long plazo_cuotas_gracias;
     //private Client client;
 
 

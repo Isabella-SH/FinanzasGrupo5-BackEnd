@@ -31,6 +31,6 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user_id;
+    private Users user;
 
 }

@@ -43,8 +43,8 @@ public class Credito2 {
     @Column(name = "renta", nullable = false)
     private Double renta;
 
-    @Column(name = "dias_plazo_gracias", nullable = false)
-    private Long dias_plazo_gracias;
+    @Column(name = "plazo_cuotas_gracias", nullable = false)
+    private Long plazo_cuotas_gracia;
 
     //muchos creditos pertenecen a un cliente
     @ManyToOne

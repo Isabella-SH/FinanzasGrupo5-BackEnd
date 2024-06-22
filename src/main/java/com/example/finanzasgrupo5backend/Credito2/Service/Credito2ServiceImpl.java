@@ -12,6 +12,7 @@ import com.example.finanzasgrupo5backend.Credito2.Service.Pago.IPagoCredito2Serv
 import com.example.finanzasgrupo5backend.Formulas.Anualidades.SimpleVencida.AnualidadSimpleVencida;
 import com.example.finanzasgrupo5backend.Profile.Clients.Repository.IClientRepository;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
+import com.example.finanzasgrupo5backend.Shared.exception.ValidationException;
 import com.example.finanzasgrupo5backend.Validations.Credito2.Credito2Validation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,35 +82,54 @@ public class Credito2ServiceImpl implements ICredito2Service {
         var existingcliente = clientRepository.findById(clienteId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el un cliente con ID: " + clienteId));
 
+
+        System.out.println(credito2Request.getPlazo_cuotas_gracias());
         // Validación
         Credito2Validation.ValidateCredito2(credito2Request);
+
+        if(credito2Request.getPlazo_cuotas_gracias()>=credito2Request.getCuotas()){
+            throw new ValidationException("La cuota de periodo de gracia del credito debe ser mayor a la cuotas");
+        }
 
         // Mapeo
         var newCredito2 = modelMapper.map(credito2Request, Credito2.class);
 
 
-        newCredito2.setRenta(AnualidadSimpleVencida.calcularRentaConPeridoDeGracia(
+       newCredito2.setRenta(AnualidadSimpleVencida.calcularRentaConPeridoDeGracia(
                 credito2Request.getCredito_limit(),
                 credito2Request.getTasa(), credito2Request.getTEP(),
                 credito2Request.getFechaInicial(), credito2Request.getFechaFinal(),
-                credito2Request.getCuotas(), credito2Request.getDias_plazo_gracias()));
+                credito2Request.getCuotas(), credito2Request.getPlazo_cuotas_gracias()));
 
+         /*
+        newCredito2.setRenta(AnualidadSimpleVencida.calcularRenta(
+                credito2Request.getCredito_limit(),
+                credito2Request.getTasa(), credito2Request.getTEP(),
+                credito2Request.getFechaInicial(), credito2Request.getFechaFinal(),
+                credito2Request.getCuotas()));
+
+       */
+
+
+        newCredito2.setPlazo_cuotas_gracia(credito2Request.getPlazo_cuotas_gracias());
         newCredito2.setClient(existingcliente); //asocia el credito a un cliente
 
         var createCredito2 = credito2Repository.save(newCredito2);
 
         var response = modelMapper.map(createCredito2, Credito2Response .class);
+        System.out.println(newCredito2.getPlazo_cuotas_gracia());
 
-        for (int i = 1; i <= credito2Request.getCuotas(); i++) {
+        response.setPlazo_cuotas_gracias(newCredito2.getPlazo_cuotas_gracia());
+        for (int i = 1; i <= credito2Request.getCuotas() - credito2Request.getPlazo_cuotas_gracias(); i++) {
             pagoCredito2Service.createPagoCredito2(createCredito2.getRenta(), 0D,
-                    (long) i, "PENDIENTE", createCredito2.getId());
+                    (long) credito2Request.getPlazo_cuotas_gracias() + i, "PENDIENTE", createCredito2.getId());
         }
 
         return response;
     }
 
     @Override
-    public Credito2Response updateCredito2(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEP, Double tasa, Double renta, Long cuotas, Long dias_plazo_gracia, Long clienteId) {
+    public Credito2Response updateCredito2(Long id, LocalDate fechaInicial, LocalDate fechaFinal, String TEP, Double tasa, Double renta, Long cuotas, Long plazo_cuotas_gracia, Long clienteId) {
 
         // Buscar el credito
         var credito2 = credito2Repository.findById(id)
@@ -121,7 +141,7 @@ public class Credito2ServiceImpl implements ICredito2Service {
         credito2.setFechaFinal(fechaFinal);
         credito2.setFechaInicial(fechaInicial);
         credito2.setCuotas(cuotas);
-        credito2.setDias_plazo_gracias(dias_plazo_gracia);
+        credito2.setPlazo_cuotas_gracia(plazo_cuotas_gracia);
         credito2.setRenta(renta);
 
         // Guardar el credito2 actualizado

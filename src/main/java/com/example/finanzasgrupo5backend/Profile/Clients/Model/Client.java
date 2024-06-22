@@ -36,7 +36,7 @@ public class Client {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user_id;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)

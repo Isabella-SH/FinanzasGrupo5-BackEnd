@@ -11,5 +11,7 @@ public class Credito2Validation {
             throw new ValidationException("El credito debe tener una tasa"); //error 400
         }
 
+
+
     }
 }
