@@ -7,6 +7,7 @@ import com.example.finanzasgrupo5backend.Credito1.Repository.ICredito1Repository
 import com.example.finanzasgrupo5backend.Credito1.Repository.IMoraCredito1Repository;
 import com.example.finanzasgrupo5backend.Formulas.Anualidades.SimpleVencida.AnualidadSimpleVencida;
 import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TEP.TasaEfectivaPeriodo;
+import com.example.finanzasgrupo5backend.Formulas.ValorFuturo.TNP.TasaNominalPeriodo;
 import com.example.finanzasgrupo5backend.Shared.exception.ResourceNotFoundException;
 import com.example.finanzasgrupo5backend.Validations.Credito1.MoraCreditos1Validation;
 import org.modelmapper.ModelMapper;
@@ -89,11 +90,24 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
         Long dias_atraso = newMora.getDias_atraso();
 
 
+        if(existingCredito1.getTEoN().equals("E")){
+            //setear datos
+            Double interes_compensatorio = TasaEfectivaPeriodo.calcularInteresCompensatorio(existingCredito1.getTEP(), existingCredito1.getTasa()
+                    , consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+            Double interes_moratorio = TasaEfectivaPeriodo.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
 
-        //setear datos
-        Double totalMoras = TasaEfectivaPeriodo.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+            double totalMoras= interes_compensatorio+interes_moratorio;
+            newMora.setTotal_moras(totalMoras);
+        }
+        else if (existingCredito1.getTEoN().equals("N")) {
+            //setear datos
+            Double interes_compensatorio = TasaNominalPeriodo.calcularInteresCompensatorio(existingCredito1.getTEP(),existingCredito1.getPerio_capitalizacion(), existingCredito1.getTasa()
+                    , consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+            Double interes_moratorio = TasaNominalPeriodo.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
 
-        newMora.setTotal_moras(totalMoras);
+            double totalMoras= interes_compensatorio+interes_moratorio;
+            newMora.setTotal_moras(totalMoras);
+        }
 
         var createMora = moraCredito1Repository.save(newMora);
         var response = modelMapper.map(createMora, MoraCredito1Response.class);
@@ -103,28 +117,41 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
 
 
     @Override
-    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Double total_moras, Long credito1) {
+    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Long credito1) {
         // Buscar el mora
         var mora = moraCredito1Repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un mora con el id: " + id));
 
-
-        mora.setTotal_moras(total_moras);
+        //setea nuevos valores de mora
         mora.setTEPm(TEPm);
         mora.setDias_atraso(dias_atraso);
         mora.setTasa(tasa);
 
+        //obtiene datos
+        String tep_credito= mora.getCredito1().getTEP();
+        double tasa_credito= mora.getCredito1().getTasa();
+        double monto_total= consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1);
+        String periodo_capi= mora.getCredito1().getPerio_capitalizacion();
 
-        //usar formulas
-        Double interes_compensatorio = AnualidadSimpleVencida.calcularInteresCompensatorio(TEPm, tasa
-                , consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1), (double) dias_atraso);
-        Double interes_moratorio = AnualidadSimpleVencida.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(credito1),  (double) dias_atraso);
 
+        if(mora.getCredito1().getTEoN().equals("E")){
+            //setear datos
+            Double interes_compensatorio = TasaEfectivaPeriodo.calcularInteresCompensatorio(tep_credito, tasa_credito
+                    ,monto_total, dias_atraso);
+            Double interes_moratorio = TasaEfectivaPeriodo.calcularInteresMoratorio(TEPm, tasa, monto_total, dias_atraso);
 
-        //setear datos
-        double totalMoras= interes_compensatorio+interes_moratorio;
-        mora.setTotal_moras(totalMoras);
+            double totalMoras= interes_compensatorio+interes_moratorio;
+            mora.setTotal_moras(totalMoras);
+        }
+        else if (mora.getCredito1().getTEoN().equals("N")) {
+            //setear datos
+            Double interes_compensatorio = TasaNominalPeriodo.calcularInteresCompensatorio(tep_credito,periodo_capi, tasa_credito
+                    , monto_total, dias_atraso);
+            Double interes_moratorio = TasaNominalPeriodo.calcularInteresMoratorio(TEPm, tasa, monto_total, dias_atraso);
 
+            double totalMoras= interes_compensatorio+interes_moratorio;
+            mora.setTotal_moras(totalMoras);
+        }
 
         // Guardar el moracredito1  actualizado
         var updatedreservation = moraCredito1Repository.save(mora);

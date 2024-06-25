@@ -13,7 +13,7 @@ public interface IMoraCredito1Service {
 
     MoraCredito1Response createMoraCredito1(MoraCredito1Request moracredito1Request, Long creditoId);
 
-    public abstract MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Double total_moras, Long credito1);
+    public abstract MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Long credito1);
 
     public abstract MoraCredito1Response deleteMoraCredito1(Long id);
 

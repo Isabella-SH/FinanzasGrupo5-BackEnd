@@ -61,11 +61,11 @@ public class MoraCredito1Controller {
     @Operation(summary = "Update a mora-credito1")
     @PatchMapping("/moras-credito1/{id}")
     public ResponseEntity<MoraCredito1Response> updateMoraCredito1(@PathVariable(name = "id") Long moraCredito1Id,
-                                                           @RequestParam String TEPm, @RequestParam Double tasa, @RequestParam Long dias_atraso, @RequestParam Double total_moras){
+                                                           @RequestParam String TEPm, @RequestParam Double tasa, @RequestParam Long dias_atraso){
 
 
         long credito1Id=1;
-        var res = moraCredito1Service.updateMoraCredito1(moraCredito1Id, TEPm, tasa, dias_atraso,total_moras, credito1Id);
+        var res = moraCredito1Service.updateMoraCredito1(moraCredito1Id, TEPm, tasa, dias_atraso, credito1Id);
         if (res == null) {
             return ResponseEntity.notFound().build();
         }
