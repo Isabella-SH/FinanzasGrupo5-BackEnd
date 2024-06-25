@@ -68,8 +68,7 @@ public class TasaEfectivaPeriodo {
         return interesMoratorio;
     }
 
-    public static Double interes(Double tasa, Double precio){
-        return precio * (tasa/100);
+    public static Double interes(Double montoConsumo, Double precio){
+        return montoConsumo - precio;
     }
-
 }

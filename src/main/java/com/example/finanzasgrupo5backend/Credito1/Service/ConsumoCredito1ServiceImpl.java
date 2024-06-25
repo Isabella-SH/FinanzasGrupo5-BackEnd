@@ -130,19 +130,22 @@ public class ConsumoCredito1ServiceImpl implements IConsumoCredito1Service{
         String periodoCapi= newConsumo.getCredito1().getPerio_capitalizacion();
 
            //setear datos
-        //System.out.println(TasaEfectivaPeriodo.interes(tasa,precio));
-        Double interesConsumo= TasaEfectivaPeriodo.interes(tasa,precio);
 
-        newConsumo.setInteres(interesConsumo);
         //System.out.println(newConsumo.getCredito1().getTEoN());
         if(newConsumo.getCredito1().getTEoN().equals("E")){
             System.out.println("EFECTIVO");
             Double montoConsumo= TasaEfectivaPeriodo.montoPagarConsumo(fechaI,fechaF, tep,tasa,precio);
             newConsumo.setMontoConsumo(montoConsumo);
+            //System.out.println(TasaEfectivaPeriodo.interes(tasa,precio));
+            Double interesConsumo= TasaEfectivaPeriodo.interes(montoConsumo,precio);
+            newConsumo.setInteres(interesConsumo);
         }
         else if (newConsumo.getCredito1().getTEoN().equals("N")) {
             Double montoConsumo= TasaNominalPeriodo.montoPagarConsumo(fechaI,fechaF, tnp,tasa,precio,periodoCapi);
             newConsumo.setMontoConsumo(montoConsumo);
+            //System.out.println(TasaEfectivaPeriodo.interes(tasa,precio));
+            Double interesConsumo= TasaNominalPeriodo.interes(montoConsumo,precio);
+            newConsumo.setInteres(interesConsumo);
         }
         newConsumo.setFechaFinal(existingCredito1.getFechaFinal());
 
