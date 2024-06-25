@@ -29,7 +29,7 @@ public class MoraCredito1 {
     private Double tasa;
 
     @Column(name = "dias_atraso", nullable = false)
-    private Long dias_atraso;
+    private Double dias_atraso;
 
     @Column(name = "total_moras", nullable = false)
     private Double total_moras; //ESTO SALE DE LAS FORMULAS

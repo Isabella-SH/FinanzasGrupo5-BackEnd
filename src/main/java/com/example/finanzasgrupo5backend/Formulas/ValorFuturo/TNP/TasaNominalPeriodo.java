@@ -34,6 +34,18 @@ public class TasaNominalPeriodo {
         return 0D;
     }
 
+    public static Double numeroDiasPeriodoMora(String tep) {
+
+        if(tep.equals("TEM")) { return 30D; }
+        if(tep.equals("TEQ")) { return 15D; }
+        if(tep.equals("TES")) { return 180D; }
+        if(tep.equals("TEA")) { return 360D; }
+        if(tep.equals("TED")) { return 1D; }
+        if(tep.equals("TEC")) { return 120D; }
+        if(tep.equals("TET")) { return 90D; }
+        return 0D;
+    }
+
     public static Double numeroDiasPeriodoCapitalizacion(String periodo_capi) {
 
         if (periodo_capi.equals("diario")) {            return 1D;        }
@@ -71,7 +83,7 @@ public class TasaNominalPeriodo {
         return s;
     }
 
-    public static Double calcularInteresCompensatorio(String tnp_credito, String periodo_capi, Double tasa_credito, Double valorNominal, long diasAtraso) {
+    public static Double calcularInteresCompensatorio(String tnp_credito, String periodo_capi, Double tasa_credito, Double valorNominal, Double diasAtraso) {
 
         //         TNP                  c.?              t= dias_atraso
         //          ? en P = m                     ? en t = n
@@ -90,11 +102,11 @@ public class TasaNominalPeriodo {
         return interesCompensatorio;
     }
 
-    public static Double calcularInteresMoratorio(String tep_mora, Double tasa_mora, Double valorNominal, long diasAtraso) {
+    public static Double calcularInteresMoratorio(String tep_mora, Double tasa_mora, Double valorNominal, Double diasAtraso) {
 
         //Im= valor nominal [(1+tep)^(diastrasladar/diastep)  -1]
 
-        double ndp = numeroDiasPeriodo(tep_mora);
+        double ndp = numeroDiasPeriodoMora(tep_mora);
         double interes = tasa_mora / 100;
 
         Double interesMoratorio = (Double) (valorNominal * (Math.pow((1 + interes), (diasAtraso / ndp)) - 1));

@@ -87,7 +87,7 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
         //obtener datos
         String TEPm = newMora.getTEPm();
         Double tasa = newMora.getTasa();
-        Long dias_atraso = newMora.getDias_atraso();
+        Double dias_atraso = newMora.getDias_atraso();
 
 
         if(existingCredito1.getTEoN().equals("E")){
@@ -117,7 +117,7 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
 
 
     @Override
-    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Long dias_atraso, Long credito1) {
+    public MoraCredito1Response updateMoraCredito1(Long id, String TEPm, Double tasa, Double dias_atraso, Long credito1) {
         // Buscar el mora
         var mora = moraCredito1Repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro un mora con el id: " + id));

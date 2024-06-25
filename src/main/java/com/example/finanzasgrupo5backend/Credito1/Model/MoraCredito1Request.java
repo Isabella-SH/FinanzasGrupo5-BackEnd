@@ -12,7 +12,7 @@ public class MoraCredito1Request {
 
     private String TEPm;
     private Double tasa;
-    private Long dias_atraso;
+    private Double dias_atraso;
 
 
     //private Credito1 credito1;

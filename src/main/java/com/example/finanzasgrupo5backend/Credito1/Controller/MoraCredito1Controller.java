@@ -61,7 +61,7 @@ public class MoraCredito1Controller {
     @Operation(summary = "Update a mora-credito1")
     @PatchMapping("/moras-credito1/{id}")
     public ResponseEntity<MoraCredito1Response> updateMoraCredito1(@PathVariable(name = "id") Long moraCredito1Id,
-                                                           @RequestParam String TEPm, @RequestParam Double tasa, @RequestParam Long dias_atraso){
+                                                           @RequestParam String TEPm, @RequestParam Double tasa, @RequestParam Double dias_atraso){
 
 
         long credito1Id=1;

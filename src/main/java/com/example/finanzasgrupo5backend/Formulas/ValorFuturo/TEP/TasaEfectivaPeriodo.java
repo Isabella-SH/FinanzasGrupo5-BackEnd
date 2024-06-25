@@ -46,7 +46,7 @@ public class TasaEfectivaPeriodo {
         return s;
     }
 
-    public static Double calcularInteresCompensatorio(String tep_credito, Double tasa_credito, Double valorNominal, long diasAtraso) {
+    public static Double calcularInteresCompensatorio(String tep_credito, Double tasa_credito, Double valorNominal, Double diasAtraso) {
 
         //Ic= valor nominal [(1+tep)^(dias trasladar/ dias periodo)  -1]
         Double ndp = numeroDiasPeriodo(tep_credito);
@@ -57,7 +57,7 @@ public class TasaEfectivaPeriodo {
         return interesCompensatorio;
     }
 
-    public static Double calcularInteresMoratorio(String tep_mora, Double tasa_mora, Double valorNominal, long diasAtraso) {
+    public static Double calcularInteresMoratorio(String tep_mora, Double tasa_mora, Double valorNominal, Double diasAtraso) {
 
         //Im= valor nominal [(1+tep)^(dias trasladar/ dias periodo)  -1]
         Double ndp = numeroDiasPeriodo(tep_mora);
