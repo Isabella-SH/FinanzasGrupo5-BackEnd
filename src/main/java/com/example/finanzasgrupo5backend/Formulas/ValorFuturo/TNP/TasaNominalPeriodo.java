@@ -49,7 +49,7 @@ public class TasaNominalPeriodo {
     public static Double numeroDiasPeriodoCapitalizacion(String periodo_capi) {
 
         if (periodo_capi.equals("diario")) {            return 1D;        }
-        if (periodo_capi.equals("quincel")) {            return 15D;        }
+        if (periodo_capi.equals("quincenal")) {            return 15D;        }
         if (periodo_capi.equals("mensual")) {            return 30D;        }
         if (periodo_capi.equals("bimestral")) {            return 60D;        }
         if (periodo_capi.equals("trimestral")) {            return 90D;        }
