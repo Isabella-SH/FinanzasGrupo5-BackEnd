@@ -101,9 +101,12 @@ public class IMoraCredito1ServiceImpl implements IMoraCredito1Service {
         }
         else if (existingCredito1.getTEoN().equals("N")) {
             //setear datos
-            Double interes_compensatorio = TasaNominalPeriodo.calcularInteresCompensatorio(existingCredito1.getTEP(),existingCredito1.getPerio_capitalizacion(), existingCredito1.getTasa()
+            Double interes_compensatorio = TasaNominalPeriodo.calcularInteresCompensatorio(existingCredito1.getTNP()
+                    ,existingCredito1.getPerio_capitalizacion(), existingCredito1.getTasa()
                     , consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+            System.out.println((interes_compensatorio));
             Double interes_moratorio = TasaNominalPeriodo.calcularInteresMoratorio(TEPm, tasa, consumoCredito1Repository.sumTotalConsumoByCreditoId(creditoId), dias_atraso);
+            System.out.println((interes_moratorio));
 
             double totalMoras= interes_compensatorio+interes_moratorio;
             newMora.setTotal_moras(totalMoras);
